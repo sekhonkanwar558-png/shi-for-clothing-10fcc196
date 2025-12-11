@@ -11,7 +11,7 @@ export const products: Product[] = [
     id: "prod_TaF0tqEw4T87rS",
     name: "OVERSIZED T SHIRT",
     category: "HOODIE",
-    price: 180,
+    price: 1,
     priceId: "price_1Sd4WLJ16B8cS3WHaNUvki7G",
   },
   {
