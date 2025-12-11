@@ -9,8 +9,7 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="font-display text-4xl">DESTRUCTION</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Premium relaxed streetwear for those who break the ordinary. 
-              Urban. Raw. Unapologetic.
+              Premium relaxed streetwear for those who break the ordinary.
             </p>
           </div>
 
@@ -20,19 +19,16 @@ const Footer = () => {
               Navigate
             </h4>
             <div className="flex flex-col gap-3">
-              <a href="#shop" className="font-body text-sm text-foreground hover:text-primary transition-colors">
+              <a href="#shop" className="font-body text-sm text-foreground hover:text-muted-foreground transition-colors">
                 Shop
               </a>
-              <a href="#lookbook" className="font-body text-sm text-foreground hover:text-primary transition-colors">
-                Lookbook
-              </a>
-              <a href="#about" className="font-body text-sm text-foreground hover:text-primary transition-colors">
+              <a href="#about" className="font-body text-sm text-foreground hover:text-muted-foreground transition-colors">
                 About
               </a>
-              <a href="#" className="font-body text-sm text-foreground hover:text-primary transition-colors">
+              <a href="#" className="font-body text-sm text-foreground hover:text-muted-foreground transition-colors">
                 Size Guide
               </a>
-              <a href="#" className="font-body text-sm text-foreground hover:text-primary transition-colors">
+              <a href="#" className="font-body text-sm text-foreground hover:text-muted-foreground transition-colors">
                 Shipping & Returns
               </a>
             </div>
@@ -46,21 +42,21 @@ const Footer = () => {
             <div className="flex gap-4">
               <a
                 href="#"
-                className="w-12 h-12 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all"
+                className="w-12 h-12 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-all"
                 aria-label="Instagram"
               >
                 <Instagram size={20} />
               </a>
               <a
                 href="#"
-                className="w-12 h-12 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all"
+                className="w-12 h-12 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-all"
                 aria-label="Twitter / X"
               >
                 <Twitter size={20} />
               </a>
               <a
                 href="#"
-                className="w-12 h-12 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all font-display text-sm"
+                className="w-12 h-12 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-all font-display text-sm"
                 aria-label="TikTok"
               >
                 TT
@@ -70,7 +66,7 @@ const Footer = () => {
               <p className="font-body text-xs tracking-widest text-muted-foreground uppercase mb-2">
                 Email
               </p>
-              <a href="mailto:info@destruction.com" className="font-body text-sm text-foreground hover:text-primary transition-colors">
+              <a href="mailto:info@destruction.com" className="font-body text-sm text-foreground hover:text-muted-foreground transition-colors">
                 info@destruction.com
               </a>
             </div>
@@ -83,10 +79,10 @@ const Footer = () => {
             © 2024 DESTRUCTION. ALL RIGHTS RESERVED.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
+            <a href="#" className="font-body text-xs text-muted-foreground hover:text-foreground transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="font-body text-xs text-muted-foreground hover:text-primary transition-colors">
+            <a href="#" className="font-body text-xs text-muted-foreground hover:text-foreground transition-colors">
               Terms of Service
             </a>
           </div>
