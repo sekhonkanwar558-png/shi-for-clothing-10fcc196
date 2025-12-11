@@ -8,11 +8,11 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    id: "prod_TaF0tqEw4T87rS",
+    id: "prod_TaFNGil14tdZVt",
     name: "OVERSIZED T SHIRT",
-    category: "HOODIE",
+    category: "TEE",
     price: 1,
-    priceId: "price_1Sd4WLJ16B8cS3WHaNUvki7G",
+    priceId: "price_1Sd4t4J16B8cS3WHSDKI7U4L",
   },
   {
     id: "prod_TaF0MA9oejXQ1V",
