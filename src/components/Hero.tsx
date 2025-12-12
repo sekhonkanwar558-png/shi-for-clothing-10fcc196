@@ -36,7 +36,7 @@ const Hero = () => {
             <div className="aspect-[4/5] relative overflow-hidden">
               <img 
                 src={heroImage} 
-                alt="Tony Ozkan wearing sekhonfy oversized t-shirt" 
+                alt="Tony Ozkan wearing SEKHONFY oversized t-shirt" 
                 className="w-full h-full object-cover object-top"
               />
             </div>

@@ -10,7 +10,7 @@ const AboutBrand = () => {
             <div className="aspect-square bg-muted/30 relative flex items-center justify-center">
               <img 
                 src={sekhonfyLogo} 
-                alt="sekhonfy brand logo" 
+                alt="SEKHONFY brand logo" 
                 className="w-2/3 h-auto"
               />
             </div>
@@ -31,7 +31,7 @@ const AboutBrand = () => {
 
             <div className="space-y-6 text-muted-foreground">
               <p className="font-body text-lg leading-relaxed">
-                sekhonfy is built on one belief: quality over quantity. We focus exclusively on oversized t-shirts, perfecting every detail.
+                SEKHONFY is built on one belief: quality over quantity. We focus exclusively on oversized t-shirts, perfecting every detail.
               </p>
               <p className="font-body leading-relaxed">
                 Premium 300gsm cotton, reinforced stitching, and a relaxed silhouette designed to last. No trends, no compromises—just timeless essentials built to endure.
