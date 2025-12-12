@@ -1,19 +1,18 @@
+import sekhonfyLogo from "@/assets/sekhonfy-logo.png";
+
 const AboutBrand = () => {
   return (
     <section id="about" className="py-24 bg-card">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image Placeholder */}
+          {/* Logo Image */}
           <div className="order-2 lg:order-1">
-            <div className="aspect-square placeholder-box relative">
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                <div className="w-20 h-20 border border-dashed border-muted-foreground/40 mb-6" />
-                <span className="font-body text-xs tracking-[0.2em] leading-relaxed">
-                  BRAND PHOTO HERE
-                  <br />
-                  <span className="text-muted-foreground">Behind-the-Brand Image</span>
-                </span>
-              </div>
+            <div className="aspect-square bg-muted/30 relative flex items-center justify-center">
+              <img 
+                src={sekhonfyLogo} 
+                alt="sekhonfy brand logo" 
+                className="w-2/3 h-auto"
+              />
             </div>
           </div>
 
