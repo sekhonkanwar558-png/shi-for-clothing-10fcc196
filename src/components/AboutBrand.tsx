@@ -32,7 +32,7 @@ const AboutBrand = () => {
 
             <div className="space-y-6 text-muted-foreground">
               <p className="font-body text-lg leading-relaxed">
-                DESTRUCTION represents the raw energy of urban rebellion. We craft premium relaxed streetwear built for those who refuse to conform.
+                sekhonfy represents the raw energy of urban rebellion. We craft premium relaxed streetwear built for those who refuse to conform.
               </p>
               <p className="font-body leading-relaxed">
                 Every piece is designed with ultimate comfort in mind, using high-quality materials that move with you through the chaos of city life.
