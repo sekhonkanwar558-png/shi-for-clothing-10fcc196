@@ -76,10 +76,20 @@ const Cart = () => {
           <>
             <div className="flex-1 overflow-auto py-6 space-y-6">
               {items.map((item) => (
-                <div key={item.id} className="flex gap-4">
-                  {/* Product Image Placeholder */}
-                  <div className="w-20 h-24 placeholder-box flex-shrink-0">
-                    <span className="text-[8px]">IMG</span>
+                <div key={`${item.id}-${item.size || "default"}`} className="flex gap-4">
+                  {/* Product Image */}
+                  <div className="w-20 h-24 flex-shrink-0 border border-border bg-muted overflow-hidden">
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-[8px] text-muted-foreground">IMG</span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Product Details */}
@@ -89,6 +99,11 @@ const Cart = () => {
                         {item.category}
                       </p>
                       <h4 className="font-display text-lg">{item.name}</h4>
+                      {item.size && (
+                        <p className="font-body text-xs text-muted-foreground">
+                          Size: {item.size}
+                        </p>
+                      )}
                       <p className="font-body text-sm">${item.price}</p>
                     </div>
 
@@ -96,7 +111,7 @@ const Cart = () => {
                       <div className="flex items-center border border-border">
                         <button
                           onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
+                            updateQuantity(item.id, item.quantity - 1, item.size)
                           }
                           className="p-2 hover:bg-muted transition-colors"
                         >
@@ -107,7 +122,7 @@ const Cart = () => {
                         </span>
                         <button
                           onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
+                            updateQuantity(item.id, item.quantity + 1, item.size)
                           }
                           className="p-2 hover:bg-muted transition-colors"
                         >
@@ -116,7 +131,7 @@ const Cart = () => {
                       </div>
 
                       <button
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeFromCart(item.id, item.size)}
                         className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                       >
                         <X size={18} />

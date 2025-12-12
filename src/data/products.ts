@@ -1,9 +1,13 @@
+export type Size = "S" | "M" | "L";
+
 export interface Product {
   id: string;
   name: string;
   category: string;
   price: number;
   priceId: string;
+  image?: string;
+  sizes?: Size[];
 }
 
 export const products: Product[] = [
@@ -13,6 +17,8 @@ export const products: Product[] = [
     category: "TEE",
     price: 1,
     priceId: "price_1Sd4t4J16B8cS3WHSDKI7U4L",
+    image: "https://vynlouldzejwwoarwvhk.supabase.co/storage/v1/object/public/product/oversized-tshirt.jpg",
+    sizes: ["S", "M", "L"],
   },
   {
     id: "prod_TaF0MA9oejXQ1V",
