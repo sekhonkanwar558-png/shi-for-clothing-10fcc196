@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import ShopifyCart from "./ShopifyCart";
+import sekhonfyLogo from "@/assets/sekhonfy-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,9 +17,9 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <a
           href="#"
-          className="font-display text-3xl tracking-tighter text-foreground hover:text-muted-foreground transition-colors"
+          className="hover:opacity-80 transition-opacity"
         >
-          sekhonfy
+          <img src={sekhonfyLogo} alt="sekhonfy" className="h-8 w-auto" />
         </a>
 
         {/* Desktop Navigation */}
