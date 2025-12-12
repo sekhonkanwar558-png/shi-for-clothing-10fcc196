@@ -1,4 +1,5 @@
 import { Instagram, Twitter } from "lucide-react";
+import sekhonfyLogo from "@/assets/sekhonfy-logo.png";
 
 const Footer = () => {
   return (
@@ -7,7 +8,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
           <div className="space-y-6">
-            <h3 className="font-display text-4xl">sekhonfy</h3>
+            <img src={sekhonfyLogo} alt="sekhonfy" className="h-10 w-auto" />
             <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-xs">
               Premium oversized t-shirts. Crafted with care, built to last.
             </p>
