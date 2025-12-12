@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="font-display text-4xl">sekhonfy</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Premium relaxed streetwear for those who break the ordinary.
+              Premium oversized t-shirts. Crafted with care, built to last.
             </p>
           </div>
 

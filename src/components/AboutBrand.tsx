@@ -21,29 +21,29 @@ const AboutBrand = () => {
           <div className="order-1 lg:order-2 space-y-8">
             <div>
               <p className="font-body text-sm tracking-[0.3em] text-muted-foreground uppercase mb-4">
-                The Brand
+                Our Philosophy
               </p>
               <h2 className="heading-display text-5xl md:text-6xl mb-6">
-                BREAKING
+                CRAFTED
                 <br />
-                BOUNDARIES
+                WITH CARE
               </h2>
             </div>
 
             <div className="space-y-6 text-muted-foreground">
               <p className="font-body text-lg leading-relaxed">
-                sekhonfy represents the raw energy of urban rebellion. We craft premium relaxed streetwear built for those who refuse to conform.
+                sekhonfy is built on one belief: quality over quantity. We focus exclusively on oversized t-shirts, perfecting every detail.
               </p>
               <p className="font-body leading-relaxed">
-                Every piece is designed with ultimate comfort in mind, using high-quality materials that move with you through the chaos of city life.
+                Premium 300gsm cotton, reinforced stitching, and a relaxed silhouette designed to last. No trends, no compromises—just timeless essentials built to endure.
               </p>
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border">
               <div>
-                <p className="heading-display text-4xl">2024</p>
-                <p className="font-body text-xs tracking-widest text-muted-foreground mt-2">FOUNDED</p>
+                <p className="heading-display text-4xl">300</p>
+                <p className="font-body text-xs tracking-widest text-muted-foreground mt-2">GSM COTTON</p>
               </div>
               <div>
                 <p className="heading-display text-4xl">100%</p>
@@ -51,7 +51,7 @@ const AboutBrand = () => {
               </div>
               <div>
                 <p className="heading-display text-4xl">∞</p>
-                <p className="font-body text-xs tracking-widest text-muted-foreground mt-2">ATTITUDE</p>
+                <p className="font-body text-xs tracking-widest text-muted-foreground mt-2">WEARS</p>
               </div>
             </div>
           </div>

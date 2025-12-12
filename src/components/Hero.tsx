@@ -7,25 +7,25 @@ const Hero = () => {
           <div className="space-y-8 animate-slide-up">
             <div className="space-y-4">
               <p className="font-body text-sm tracking-[0.3em] text-muted-foreground uppercase">
-                Streetwear Redefined
+                Premium Essentials
               </p>
               <h1 className="heading-display text-6xl md:text-7xl lg:text-8xl">
-                DESTROY THE ORDINARY.
+                LESS IS MORE.
               </h1>
               <h2 className="heading-display text-4xl md:text-5xl lg:text-6xl text-muted-foreground">
-                WEAR THE UNEXPECTED.
+                QUALITY IS EVERYTHING.
               </h2>
             </div>
 
             <p className="font-body text-lg text-muted-foreground max-w-md leading-relaxed">
-              Premium relaxed fits for those who break the ordinary. Urban. Raw. Unapologetic.
+              Meticulously crafted oversized t-shirts. Premium fabrics, timeless design, uncompromising quality.
             </p>
 
             <a
               href="#shop"
               className="inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground font-display text-xl tracking-wider hover:bg-primary/90 transition-all"
             >
-              SHOP NOW
+              EXPLORE
             </a>
           </div>
 
