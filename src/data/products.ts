@@ -7,6 +7,7 @@ export interface Product {
   name: string;
   category: string;
   price: number;
+  originalPrice?: number;
   priceId: string;
   image?: string;
   sizes?: Size[];
@@ -17,7 +18,8 @@ export const products: Product[] = [
     id: "prod_TaFNGil14tdZVt",
     name: "OVERSIZED T SHIRT",
     category: "TEE",
-    price: 1,
+    price: 0.5,
+    originalPrice: 1,
     priceId: "price_1Sd4t4J16B8cS3WHSDKI7U4L",
     image: oversizedTshirtImg,
     sizes: ["S", "M", "L"],
@@ -28,6 +30,7 @@ export const products: Product[] = [
     category: "TEE",
     price: 85,
     priceId: "price_1Sd4WaJ16B8cS3WHOK6CMT2j",
+    image: oversizedTshirtImg,
     sizes: ["S", "M", "L"],
   },
   {
@@ -36,6 +39,7 @@ export const products: Product[] = [
     category: "CARGO",
     price: 220,
     priceId: "price_1Sd4WlJ16B8cS3WHzIJxcC4f",
+    image: oversizedTshirtImg,
     sizes: ["S", "M", "L"],
   },
   {
@@ -44,6 +48,7 @@ export const products: Product[] = [
     category: "JACKET",
     price: 350,
     priceId: "price_1Sd4WvJ16B8cS3WHO7fbFwCs",
+    image: oversizedTshirtImg,
     sizes: ["S", "M", "L"],
   },
 ];
