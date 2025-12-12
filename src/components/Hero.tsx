@@ -1,3 +1,5 @@
+import heroImage from "@/assets/hero-image.jpg";
+
 const Hero = () => {
   return (
     <section className="relative min-h-[80vh] flex flex-col justify-center pt-20">
@@ -29,17 +31,14 @@ const Hero = () => {
             </a>
           </div>
 
-          {/* Right - Image Placeholder */}
+          {/* Right - Hero Image */}
           <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <div className="aspect-[4/5] placeholder-box relative">
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                <div className="w-16 h-16 border border-dashed border-muted-foreground/50 mb-6" />
-                <span className="font-body text-xs tracking-[0.2em] leading-relaxed">
-                  IMAGE PLACEHOLDER
-                  <br />
-                  <span className="text-muted-foreground">Upload Branded Photo Here</span>
-                </span>
-              </div>
+            <div className="aspect-[4/5] relative overflow-hidden">
+              <img 
+                src={heroImage} 
+                alt="Tony Ozkan wearing sekhonfy oversized t-shirt" 
+                className="w-full h-full object-cover object-top"
+              />
             </div>
           </div>
         </div>
