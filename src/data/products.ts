@@ -26,6 +26,7 @@ export const products: Product[] = [
     category: "TEE",
     price: 85,
     priceId: "price_1Sd4WaJ16B8cS3WHOK6CMT2j",
+    sizes: ["S", "M", "L"],
   },
   {
     id: "prod_TaF0HJCj4Wo0QV",
@@ -33,6 +34,7 @@ export const products: Product[] = [
     category: "CARGO",
     price: 220,
     priceId: "price_1Sd4WlJ16B8cS3WHzIJxcC4f",
+    sizes: ["S", "M", "L"],
   },
   {
     id: "prod_TaF0RErdhJlQgB",
@@ -40,5 +42,6 @@ export const products: Product[] = [
     category: "JACKET",
     price: 350,
     priceId: "price_1Sd4WvJ16B8cS3WHO7fbFwCs",
+    sizes: ["S", "M", "L"],
   },
 ];
