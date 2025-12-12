@@ -19,7 +19,7 @@ const Navbar = () => {
           href="#"
           className="hover:opacity-80 transition-opacity"
         >
-          <img src={sekhonfyLogo} alt="sekhonfy" className="h-8 w-auto" />
+          <img src={sekhonfyLogo} alt="SEKHONFY" className="h-8 w-auto" />
         </a>
 
         {/* Desktop Navigation */}

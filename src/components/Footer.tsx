@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
           <div className="space-y-6">
-            <img src={sekhonfyLogo} alt="sekhonfy" className="h-16 w-auto" />
+            <img src={sekhonfyLogo} alt="SEKHONFY" className="h-16 w-auto" />
             <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-xs">
               Premium oversized t-shirts. Crafted with care, built to last.
             </p>
@@ -77,7 +77,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-body text-xs text-muted-foreground tracking-widest">
-            © 2024 sekhonfy. ALL RIGHTS RESERVED.
+            © 2024 SEKHONFY. ALL RIGHTS RESERVED.
           </p>
           <div className="flex gap-6">
             <a href="#" className="font-body text-xs text-muted-foreground hover:text-foreground transition-colors">
