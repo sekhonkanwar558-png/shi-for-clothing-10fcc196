@@ -18,7 +18,7 @@ const Navbar = () => {
           href="#"
           className="font-display text-3xl tracking-tighter text-foreground hover:text-muted-foreground transition-colors"
         >
-          DESTRUCTION
+          sekhonfy
         </a>
 
         {/* Desktop Navigation */}

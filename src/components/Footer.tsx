@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
           <div className="space-y-6">
-            <h3 className="font-display text-4xl">DESTRUCTION</h3>
+            <h3 className="font-display text-4xl">sekhonfy</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-xs">
               Premium relaxed streetwear for those who break the ordinary.
             </p>
@@ -66,8 +66,8 @@ const Footer = () => {
               <p className="font-body text-xs tracking-widest text-muted-foreground uppercase mb-2">
                 Email
               </p>
-              <a href="mailto:info@destruction.com" className="font-body text-sm text-foreground hover:text-muted-foreground transition-colors">
-                info@destruction.com
+              <a href="mailto:info@sekhonfy.com" className="font-body text-sm text-foreground hover:text-muted-foreground transition-colors">
+                info@sekhonfy.com
               </a>
             </div>
           </div>
@@ -76,7 +76,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-body text-xs text-muted-foreground tracking-widest">
-            © 2024 DESTRUCTION. ALL RIGHTS RESERVED.
+            © 2024 sekhonfy. ALL RIGHTS RESERVED.
           </p>
           <div className="flex gap-6">
             <a href="#" className="font-body text-xs text-muted-foreground hover:text-foreground transition-colors">
