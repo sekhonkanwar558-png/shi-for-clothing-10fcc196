@@ -15,12 +15,12 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    id: "prod_TaFNGil14tdZVt",
+    id: "prod_Tad5vlNYWiGAsS",
     name: "OVERSIZED T SHIRT",
     category: "TEE",
     price: 0.5,
     originalPrice: 1,
-    priceId: "price_1Sd4t4J16B8cS3WHSDKI7U4L",
+    priceId: "price_1SdRpLJ16B8cS3WHLG6JjO4x",
     image: oversizedTshirtImg,
     sizes: ["S", "M", "L"],
   },
