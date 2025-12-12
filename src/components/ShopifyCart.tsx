@@ -1,4 +1,4 @@
-import { X, Minus, Plus, ShoppingBag, ExternalLink, Loader2 } from "lucide-react";
+import { X, Minus, Plus, ShoppingBag, ArrowRight, Loader2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import {
   Sheet,
@@ -10,6 +10,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
+
+// Detect mobile device
+const isMobileDevice = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+};
 
 const ShopifyCart = () => {
   const { items, removeItem, updateQuantity, clearCart, isLoading, createCheckout, totalItems, totalPrice } =
@@ -31,7 +36,14 @@ const ShopifyCart = () => {
       if (checkoutUrl) {
         clearCart();
         setIsOpen(false);
-        window.open(checkoutUrl, "_blank");
+        
+        // On mobile, redirect in same window to avoid popup blockers
+        // On desktop, open in new tab for better UX
+        if (isMobileDevice()) {
+          window.location.href = checkoutUrl;
+        } else {
+          window.open(checkoutUrl, "_blank");
+        }
       } else {
         toast.error("Failed to create checkout. Please try again.");
       }
@@ -145,7 +157,7 @@ const ShopifyCart = () => {
               <Button
                 onClick={handleCheckout}
                 disabled={isLoading || items.length === 0}
-                className="w-full py-6 font-display text-lg tracking-wider"
+                className="w-full py-6 font-display text-lg tracking-wider touch-manipulation active:scale-[0.98] transition-transform"
               >
                 {isLoading ? (
                   <>
@@ -154,8 +166,8 @@ const ShopifyCart = () => {
                   </>
                 ) : (
                   <>
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    CHECKOUT
+                    <ArrowRight className="w-4 h-4 mr-2" />
+                    PROCEED TO CHECKOUT
                   </>
                 )}
               </Button>
