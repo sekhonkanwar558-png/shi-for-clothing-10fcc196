@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
           <div className="space-y-6">
-            <img src={sekhonfyLogo} alt="sekhonfy" className="h-10 w-auto" />
+            <img src={sekhonfyLogo} alt="sekhonfy" className="h-16 w-auto" />
             <p className="font-body text-sm text-muted-foreground leading-relaxed max-w-xs">
               Premium oversized t-shirts. Crafted with care, built to last.
             </p>
