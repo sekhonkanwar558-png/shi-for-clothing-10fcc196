@@ -98,11 +98,11 @@ const ShopifyProductCard = ({ product, index = 0 }: ShopifyProductCardProps) => 
             </div>
           )}
 
-          {/* Add to Cart Button */}
+          {/* Add to Cart Button - Always visible on mobile */}
           <button
             onClick={handleAddToCart}
             disabled={!selectedVariant?.availableForSale}
-            className="absolute bottom-4 left-4 right-4 py-3 bg-primary text-primary-foreground font-body text-sm tracking-wider opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="absolute bottom-4 left-4 right-4 py-3 bg-primary text-primary-foreground font-body text-sm tracking-wider opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all flex items-center justify-center gap-2 disabled:opacity-50 touch-manipulation active:scale-[0.98]"
           >
             <ShoppingBag size={16} />
             {selectedVariant?.availableForSale ? "ADD TO CART" : "SOLD OUT"}
