@@ -1,6 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import Cart from "./Cart";
+import ShopifyCart from "./ShopifyCart";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,12 +32,12 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <Cart />
+          <ShopifyCart />
         </div>
 
         {/* Mobile */}
         <div className="flex items-center gap-4 md:hidden">
-          <Cart />
+          <ShopifyCart />
           <button
             className="text-foreground hover:text-muted-foreground transition-colors"
             onClick={() => setIsOpen(!isOpen)}
