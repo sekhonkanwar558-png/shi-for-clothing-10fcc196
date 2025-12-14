@@ -67,13 +67,17 @@
   /* Improve touch targets on mobile */
   button, a {
     min-height: 44px;
-    min-width: 44px;
   }
 
   /* Prevent text selection on buttons */
   button {
     -webkit-user-select: none;
     user-select: none;
+  }
+
+  /* Better focus states */
+  :focus-visible {
+    @apply outline-none ring-2 ring-foreground ring-offset-2 ring-offset-background;
   }
 }
 
@@ -85,6 +89,33 @@
   .placeholder-box {
     @apply border border-dashed border-muted-foreground/30 bg-muted/30 flex items-center justify-center text-muted-foreground text-sm uppercase tracking-widest;
   }
+
+  /* Button hover effect */
+  .btn-hover-effect {
+    @apply relative overflow-hidden;
+  }
+  
+  .btn-hover-effect::before {
+    content: '';
+    @apply absolute inset-0 bg-foreground transform -translate-x-full transition-transform duration-300 ease-out;
+  }
+  
+  .btn-hover-effect:hover::before {
+    @apply translate-x-0;
+  }
+
+  /* Smooth image hover */
+  .img-hover-zoom {
+    @apply overflow-hidden;
+  }
+  
+  .img-hover-zoom img {
+    @apply transition-transform duration-700 ease-out;
+  }
+  
+  .img-hover-zoom:hover img {
+    @apply scale-105;
+  }
 }
 
 @layer utilities {
@@ -92,8 +123,38 @@
     animation: slide-up 0.6s ease-out forwards;
   }
 
-  .animate-fade-in {
-    animation: fade-in 0.8s ease-out forwards;
+  .animation-delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  /* Safe area padding for mobile */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+
+  /* Touch manipulation for better mobile performance */
+  .touch-action-pan {
+    touch-action: pan-y;
   }
 }
 
@@ -106,9 +167,4 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
