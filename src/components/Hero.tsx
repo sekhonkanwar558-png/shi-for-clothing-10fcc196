@@ -1,46 +1,26 @@
-import heroImage from "@/assets/hero-image.jpg";
-
 const Hero = () => {
   return (
-    <section className="relative min-h-[80vh] flex flex-col justify-center pt-20">
+    <section className="relative min-h-screen flex flex-col justify-center pt-20 bg-background">
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="space-y-8 animate-slide-up">
-            <div className="space-y-4">
-              <p className="font-body text-sm tracking-[0.3em] text-muted-foreground uppercase">
-                Premium Essentials
-              </p>
-              <h1 className="heading-display text-6xl md:text-7xl lg:text-8xl">
-                LESS IS MORE.
-              </h1>
-              <h2 className="heading-display text-4xl md:text-5xl lg:text-6xl text-muted-foreground">
-                QUALITY IS EVERYTHING.
-              </h2>
-            </div>
+        <div className="max-w-3xl mx-auto text-center space-y-8 animate-fade-in">
+          <p className="font-body text-xs tracking-[0.4em] text-muted-foreground uppercase">
+            Premium Essentials
+          </p>
+          
+          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.1em] text-foreground">
+            shi-for
+          </h1>
+          
+          <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed font-light">
+            Pure simplicity. Exceptional quality. Plain white t-shirts crafted with the finest fabrics and meticulous stitching.
+          </p>
 
-            <p className="font-body text-lg text-muted-foreground max-w-md leading-relaxed">
-              Meticulously crafted oversized t-shirts. Premium fabrics, timeless design, uncompromising quality.
-            </p>
-
-            <a
-              href="#shop"
-              className="inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground font-display text-xl tracking-wider hover:bg-primary/90 transition-all"
-            >
-              EXPLORE
-            </a>
-          </div>
-
-          {/* Right - Hero Image */}
-          <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <div className="aspect-[4/5] relative overflow-hidden">
-              <img 
-                src={heroImage} 
-                alt="Tony Ozkan wearing SEKHONFY oversized t-shirt" 
-                className="w-full h-full object-cover object-top"
-              />
-            </div>
-          </div>
+          <a
+            href="#shop"
+            className="inline-flex items-center justify-center px-12 py-4 border border-foreground text-foreground font-body text-sm tracking-[0.2em] uppercase hover:bg-foreground hover:text-background transition-all duration-300"
+          >
+            Shop Now
+          </a>
         </div>
       </div>
     </section>

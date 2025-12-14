@@ -1,57 +1,39 @@
-import sekhonfyLogo from "@/assets/sekhonfy-logo.png";
-
 const AboutBrand = () => {
   return (
-    <section id="about" className="py-24 bg-card">
+    <section id="about" className="py-32 bg-secondary">
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Logo Image */}
-          <div className="order-2 lg:order-1">
-            <div className="aspect-square bg-muted/30 relative flex items-center justify-center">
-              <img 
-                src={sekhonfyLogo} 
-                alt="SEKHONFY brand logo" 
-                className="w-2/3 h-auto"
-              />
-            </div>
+        <div className="max-w-4xl mx-auto text-center space-y-12">
+          <div className="space-y-6">
+            <p className="font-body text-xs tracking-[0.4em] text-muted-foreground uppercase">
+              Our Philosophy
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl font-light tracking-[0.1em] text-foreground">
+              Pure Simplicity
+            </h2>
           </div>
 
-          {/* Content */}
-          <div className="order-1 lg:order-2 space-y-8">
+          <div className="space-y-6 text-muted-foreground max-w-2xl mx-auto">
+            <p className="font-body text-lg leading-relaxed font-light">
+              At shi-for, we believe in the power of simplicity. One color. One style. Perfected.
+            </p>
+            <p className="font-body leading-relaxed font-light">
+              Every t-shirt is crafted from the finest premium cotton, with reinforced stitching that ensures lasting quality. No logos, no prints—just pure, timeless white.
+            </p>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-12 pt-12 border-t border-border max-w-xl mx-auto">
             <div>
-              <p className="font-body text-sm tracking-[0.3em] text-muted-foreground uppercase mb-4">
-                Our Philosophy
-              </p>
-              <h2 className="heading-display text-5xl md:text-6xl mb-6">
-                CRAFTED
-                <br />
-                WITH CARE
-              </h2>
+              <p className="font-display text-3xl font-light text-foreground">300</p>
+              <p className="font-body text-xs tracking-[0.2em] text-muted-foreground mt-2 uppercase">GSM Cotton</p>
             </div>
-
-            <div className="space-y-6 text-muted-foreground">
-              <p className="font-body text-lg leading-relaxed">
-                SEKHONFY is built on one belief: quality over quantity. We focus exclusively on oversized t-shirts, perfecting every detail.
-              </p>
-              <p className="font-body leading-relaxed">
-                Premium 300gsm cotton, reinforced stitching, and a relaxed silhouette designed to last. No trends, no compromises—just timeless essentials built to endure.
-              </p>
+            <div>
+              <p className="font-display text-3xl font-light text-foreground">100%</p>
+              <p className="font-body text-xs tracking-[0.2em] text-muted-foreground mt-2 uppercase">Premium</p>
             </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border">
-              <div>
-                <p className="heading-display text-4xl">300</p>
-                <p className="font-body text-xs tracking-widest text-muted-foreground mt-2">GSM COTTON</p>
-              </div>
-              <div>
-                <p className="heading-display text-4xl">100%</p>
-                <p className="font-body text-xs tracking-widest text-muted-foreground mt-2">PREMIUM</p>
-              </div>
-              <div>
-                <p className="heading-display text-4xl">∞</p>
-                <p className="font-body text-xs tracking-widest text-muted-foreground mt-2">WEARS</p>
-              </div>
+            <div>
+              <p className="font-display text-3xl font-light text-foreground">∞</p>
+              <p className="font-body text-xs tracking-[0.2em] text-muted-foreground mt-2 uppercase">Wears</p>
             </div>
           </div>
         </div>
