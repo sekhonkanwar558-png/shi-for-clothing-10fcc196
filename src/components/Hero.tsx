@@ -17,17 +17,19 @@ const Hero = () => {
       
       <div className="container mx-auto px-6 relative z-20">
         <div className="max-w-3xl mx-auto text-center space-y-8 animate-fade-in">
-          <p className="font-body text-xs tracking-[0.4em] text-muted-foreground uppercase">
-            Premium Essentials
-          </p>
-          
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light tracking-[0.1em] text-foreground">
-            shi-for
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.15em] text-foreground uppercase">
+            Our Guarantee
           </h1>
           
-          <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed font-light">
-            Pure simplicity. Exceptional quality. Plain white t-shirts crafted with the finest fabrics and meticulous stitching.
-          </p>
+          <div className="space-y-6 max-w-xl mx-auto">
+            <p className="font-body text-lg md:text-xl text-foreground/90 leading-relaxed">
+              <span className="font-medium">Quality:</span> our motto is "standard without compromise".
+            </p>
+            
+            <p className="font-body text-lg md:text-xl text-foreground/90 leading-relaxed">
+              <span className="font-medium">Hassle-Free:</span> once you've placed your order, we take care of everything.
+            </p>
+          </div>
 
           <a
             href="#shop"
