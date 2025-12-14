@@ -5,12 +5,6 @@ import ShopifyCart from "./ShopifyCart";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = [
-    { label: "SHOP", href: "#shop" },
-    { label: "ABOUT", href: "#about" },
-    { label: "CONTACT", href: "#contact" },
-  ];
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-6 py-5 flex items-center justify-between">
@@ -23,15 +17,12 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="font-body text-xs tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          <a
+            href="#shop"
+            className="font-body text-xs tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors uppercase"
+          >
+            Shop
+          </a>
           <ShopifyCart />
         </div>
 
@@ -52,16 +43,13 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-background border-t border-border">
           <div className="container mx-auto px-6 py-6 flex flex-col gap-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="font-body text-sm tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
+            <a
+              href="#shop"
+              className="font-body text-sm tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors uppercase"
+              onClick={() => setIsOpen(false)}
+            >
+              Shop
+            </a>
           </div>
         </div>
       )}
