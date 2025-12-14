@@ -110,14 +110,14 @@ const ShopifyProductCard = ({ product, index = 0 }: ShopifyProductCardProps) => 
         </div>
 
         {/* Product Info */}
-        <div className="space-y-2">
-          <h3 className="font-display text-xl">{product.node.title}</h3>
+        <div className="space-y-3">
+          <h3 className="font-body text-sm tracking-[0.1em] font-light text-foreground">{product.node.title}</h3>
           <div className="flex items-center gap-2">
-            <p className="font-body text-lg text-foreground">
+            <p className="font-body text-sm text-muted-foreground font-light">
               {currencyCode} {price.toFixed(2)}
             </p>
             {compareAtPrice && compareAtPrice > price && (
-              <p className="font-body text-sm text-muted-foreground line-through">
+              <p className="font-body text-xs text-muted-foreground/60 line-through">
                 {currencyCode} {compareAtPrice.toFixed(2)}
               </p>
             )}

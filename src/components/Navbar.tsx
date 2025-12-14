@@ -1,7 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import ShopifyCart from "./ShopifyCart";
-import sekhonfyLogo from "@/assets/sekhonfy-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,21 +13,21 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-6 py-5 flex items-center justify-between">
         <a
           href="#"
-          className="hover:opacity-80 transition-opacity"
+          className="font-display text-xl tracking-[0.15em] text-foreground hover:opacity-70 transition-opacity"
         >
-          <img src={sekhonfyLogo} alt="SEKHONFY" className="h-8 w-auto" />
+          shi-for
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="font-body text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+              className="font-body text-xs tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </a>
@@ -52,12 +51,12 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       {isOpen && (
         <div className="md:hidden bg-background border-t border-border">
-          <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+          <div className="container mx-auto px-6 py-6 flex flex-col gap-6">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="font-body text-lg tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                className="font-body text-sm tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
