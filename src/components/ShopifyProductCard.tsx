@@ -1,25 +1,29 @@
-import { ShoppingBag, ZoomIn } from "lucide-react";
-import { ShopifyProduct } from "@/lib/shopify";
+import { ShoppingBag, Minus, Plus, ArrowRight, Loader2 } from "lucide-react";
+import { ShopifyProduct, createStorefrontCheckout } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { useState } from "react";
-import ImageZoomModal from "./ImageZoomModal";
 
 interface ShopifyProductCardProps {
   product: ShopifyProduct;
   index?: number;
 }
 
+// Detect mobile device
+const isMobileDevice = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+};
+
 const ShopifyProductCard = ({ product, index = 0 }: ShopifyProductCardProps) => {
   const addItem = useCartStore((state) => state.addItem);
   const variants = product.node.variants.edges;
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
-  const [isZoomOpen, setIsZoomOpen] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [isBuyingNow, setIsBuyingNow] = useState(false);
 
   const selectedVariant = variants[selectedVariantIndex]?.node;
   const image = product.node.images.edges[0]?.node;
   const price = parseFloat(selectedVariant?.price.amount || "0");
-  const compareAtPrice = selectedVariant?.compareAtPrice ? parseFloat(selectedVariant.compareAtPrice.amount) : null;
   const currencyCode = selectedVariant?.price.currencyCode || "INR";
 
   // Get size options if available
@@ -37,13 +41,42 @@ const ShopifyProductCard = ({ product, index = 0 }: ShopifyProductCardProps) => 
       variantId: selectedVariant.id,
       variantTitle: selectedVariant.title,
       price: selectedVariant.price,
-      quantity: 1,
+      quantity: quantity,
       selectedOptions: selectedVariant.selectedOptions,
     });
     
-    toast.success(`${product.node.title} added to cart`, {
+    toast.success(`${quantity} × ${product.node.title} added to cart`, {
       position: "top-center",
     });
+  };
+
+  const handleBuyNow = async () => {
+    if (!selectedVariant) {
+      toast.error("Please select an option");
+      return;
+    }
+
+    setIsBuyingNow(true);
+    try {
+      const checkoutUrl = await createStorefrontCheckout([
+        { variantId: selectedVariant.id, quantity: quantity }
+      ]);
+      
+      if (checkoutUrl) {
+        if (isMobileDevice()) {
+          window.location.href = checkoutUrl;
+        } else {
+          window.open(checkoutUrl, "_blank");
+        }
+      } else {
+        toast.error("Failed to create checkout. Please try again.");
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast.error("Failed to start checkout. Please try again.");
+    } finally {
+      setIsBuyingNow(false);
+    }
   };
 
   const handleSizeSelect = (size: string) => {
@@ -59,100 +92,126 @@ const ShopifyProductCard = ({ product, index = 0 }: ShopifyProductCardProps) => 
     return selectedVariant?.selectedOptions.find(opt => opt.name.toLowerCase() === "size")?.value;
   };
 
+  const incrementQuantity = () => setQuantity(q => q + 1);
+  const decrementQuantity = () => setQuantity(q => Math.max(1, q - 1));
+
   return (
-    <>
-      <div
-        className="group animate-slide-up"
-        style={{ animationDelay: `${index * 0.1}s` }}
-      >
-        {/* Product Image */}
-        <div className="aspect-[3/4] relative overflow-hidden mb-4 border border-border group-hover:border-foreground/50 transition-colors bg-muted">
-          {image ? (
-            <>
-              <img
-                src={image.url}
-                alt={image.altText || product.node.title}
-                className="w-full h-full object-cover cursor-pointer"
-                onClick={() => setIsZoomOpen(true)}
-              />
-              <button
-                onClick={() => setIsZoomOpen(true)}
-                className="absolute top-4 right-4 p-2 bg-background/80 hover:bg-background transition-colors opacity-0 group-hover:opacity-100"
-              >
-                <ZoomIn size={18} />
-              </button>
-            </>
-          ) : (
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-              <div className="w-12 h-12 border border-dashed border-muted-foreground/40 mb-4" />
-              <span className="font-body text-xs tracking-[0.15em] leading-relaxed">
-                PRODUCT IMAGE
-              </span>
-            </div>
-          )}
+    <div
+      className="animate-fade-in"
+      style={{ animationDelay: `${index * 0.1}s` }}
+    >
+      {/* Product Image */}
+      <div className="aspect-square relative overflow-hidden mb-8 bg-secondary">
+        {image ? (
+          <img
+            src={image.url}
+            alt={image.altText || product.node.title}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+            <div className="w-12 h-12 border border-dashed border-muted-foreground/40 mb-4" />
+            <span className="font-body text-xs tracking-[0.15em] text-muted-foreground">
+              PRODUCT IMAGE
+            </span>
+          </div>
+        )}
+      </div>
 
-          {/* Sale Badge */}
-          {compareAtPrice && compareAtPrice > price && (
-            <div className="absolute top-4 left-4 bg-destructive text-destructive-foreground px-2 py-1 text-xs font-body tracking-wider">
-              SALE
-            </div>
-          )}
-
-          {/* Add to Cart Button - Always visible on mobile */}
-          <button
-            onClick={handleAddToCart}
-            disabled={!selectedVariant?.availableForSale}
-            className="absolute bottom-4 left-4 right-4 py-3 bg-primary text-primary-foreground font-body text-sm tracking-wider opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all flex items-center justify-center gap-2 disabled:opacity-50 touch-manipulation active:scale-[0.98]"
-          >
-            <ShoppingBag size={16} />
-            {selectedVariant?.availableForSale ? "ADD TO CART" : "SOLD OUT"}
-          </button>
+      {/* Product Info */}
+      <div className="space-y-6">
+        <div className="text-center">
+          <h3 className="font-body text-lg tracking-[0.05em] font-light text-foreground mb-2">
+            {product.node.title}
+          </h3>
+          <p className="font-body text-xl text-foreground">
+            ₹{price.toFixed(0)}
+          </p>
         </div>
 
-        {/* Product Info */}
-        <div className="space-y-3">
-          <h3 className="font-body text-sm tracking-[0.1em] font-light text-foreground">{product.node.title}</h3>
-          <div className="flex items-center gap-2">
-            <p className="font-body text-sm text-muted-foreground font-light">
-              {currencyCode} {price.toFixed(2)}
+        {/* Size Selection */}
+        {sizes.length > 0 && (
+          <div className="space-y-3">
+            <p className="font-body text-xs tracking-[0.2em] text-muted-foreground text-center uppercase">
+              Size
             </p>
-            {compareAtPrice && compareAtPrice > price && (
-              <p className="font-body text-xs text-muted-foreground/60 line-through">
-                {currencyCode} {compareAtPrice.toFixed(2)}
-              </p>
-            )}
-          </div>
-
-          {/* Size Selection */}
-          {sizes.length > 0 && (
-            <div className="flex gap-2 pt-2">
+            <div className="flex justify-center gap-3">
               {sizes.map((size) => (
                 <button
                   key={size}
                   onClick={() => handleSizeSelect(size)}
-                  className={`w-10 h-10 border font-body text-sm transition-colors ${
+                  className={`w-12 h-12 border font-body text-sm transition-all ${
                     getSelectedSize() === size
                       ? "border-foreground bg-foreground text-background"
-                      : "border-border hover:border-foreground"
+                      : "border-border hover:border-foreground text-foreground"
                   }`}
                 >
                   {size}
                 </button>
               ))}
             </div>
-          )}
+          </div>
+        )}
+
+        {/* Quantity Selector */}
+        <div className="space-y-3">
+          <p className="font-body text-xs tracking-[0.2em] text-muted-foreground text-center uppercase">
+            Quantity
+          </p>
+          <div className="flex justify-center">
+            <div className="flex items-center border border-border">
+              <button
+                onClick={decrementQuantity}
+                className="p-3 hover:bg-secondary transition-colors"
+                aria-label="Decrease quantity"
+              >
+                <Minus size={16} />
+              </button>
+              <span className="px-6 font-body text-sm min-w-[60px] text-center">
+                {quantity}
+              </span>
+              <button
+                onClick={incrementQuantity}
+                className="p-3 hover:bg-secondary transition-colors"
+                aria-label="Increase quantity"
+              >
+                <Plus size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="space-y-3">
+          <button
+            onClick={handleAddToCart}
+            disabled={!selectedVariant?.availableForSale}
+            className="w-full py-4 border border-foreground text-foreground font-body text-sm tracking-[0.15em] uppercase hover:bg-foreground hover:text-background transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ShoppingBag size={16} />
+            Add to Cart
+          </button>
+          
+          <button
+            onClick={handleBuyNow}
+            disabled={!selectedVariant?.availableForSale || isBuyingNow}
+            className="w-full py-4 bg-foreground text-background font-body text-sm tracking-[0.15em] uppercase hover:bg-foreground/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isBuyingNow ? (
+              <>
+                <Loader2 size={16} className="animate-spin" />
+                Processing...
+              </>
+            ) : (
+              <>
+                <ArrowRight size={16} />
+                Buy Now
+              </>
+            )}
+          </button>
         </div>
       </div>
-
-      {image && (
-        <ImageZoomModal
-          isOpen={isZoomOpen}
-          onClose={() => setIsZoomOpen(false)}
-          image={image.url}
-          alt={image.altText || product.node.title}
-        />
-      )}
-    </>
+    </div>
   );
 };
 

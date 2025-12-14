@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ShopifyShopSection from "@/components/ShopifyShopSection";
-import AboutBrand from "@/components/AboutBrand";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -10,7 +9,6 @@ const Index = () => {
       <Navbar />
       <Hero />
       <ShopifyShopSection />
-      <AboutBrand />
       <Footer />
     </main>
   );

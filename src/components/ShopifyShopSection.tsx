@@ -27,47 +27,41 @@ const ShopifyShopSection = () => {
 
   if (loading) {
     return (
-      <section id="shop" className="py-32 bg-background">
-        <div className="container mx-auto px-6 flex justify-center">
-          <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
-        </div>
+      <section id="shop" className="min-h-screen py-32 bg-background flex items-center justify-center">
+        <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
       </section>
     );
   }
 
   if (error) {
     return (
-      <section id="shop" className="py-32 bg-background">
-        <div className="container mx-auto px-6 text-center">
-          <p className="font-body text-muted-foreground">{error}</p>
-        </div>
+      <section id="shop" className="min-h-screen py-32 bg-background flex items-center justify-center">
+        <p className="font-body text-muted-foreground">{error}</p>
       </section>
     );
   }
 
   if (products.length === 0) {
     return (
-      <section id="shop" className="py-32 bg-background">
-        <div className="container mx-auto px-6 text-center">
-          <p className="font-body text-muted-foreground">No products available</p>
-        </div>
+      <section id="shop" className="min-h-screen py-32 bg-background flex items-center justify-center">
+        <p className="font-body text-muted-foreground">No products available</p>
       </section>
     );
   }
 
   return (
-    <section id="shop" className="py-32 bg-background">
+    <section id="shop" className="min-h-screen py-32 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <p className="font-body text-xs tracking-[0.4em] text-muted-foreground uppercase mb-4">
-            Collection
+            Premium Quality
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-light tracking-[0.1em] text-foreground">
-            The Essentials
+            The Collection
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="max-w-md mx-auto">
           {products.map((product, index) => (
             <ShopifyProductCard key={product.node.id} product={product} index={index} />
           ))}
