@@ -27,19 +27,9 @@ const ShopifyShopSection = () => {
 
   if (loading) {
     return (
-      <section id="shop" className="py-24">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="font-body text-sm tracking-[0.3em] text-muted-foreground uppercase mb-4">
-              Shop Collection
-            </p>
-            <h2 className="heading-display text-5xl md:text-6xl">
-              ALL PRODUCTS
-            </h2>
-          </div>
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
-          </div>
+      <section id="shop" className="py-32 bg-background">
+        <div className="container mx-auto px-6 flex justify-center">
+          <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
         </div>
       </section>
     );
@@ -47,11 +37,9 @@ const ShopifyShopSection = () => {
 
   if (error) {
     return (
-      <section id="shop" className="py-24">
-        <div className="container mx-auto px-6">
-          <div className="text-center">
-            <p className="text-destructive">{error}</p>
-          </div>
+      <section id="shop" className="py-32 bg-background">
+        <div className="container mx-auto px-6 text-center">
+          <p className="font-body text-muted-foreground">{error}</p>
         </div>
       </section>
     );
@@ -59,42 +47,27 @@ const ShopifyShopSection = () => {
 
   if (products.length === 0) {
     return (
-      <section id="shop" className="py-24">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="font-body text-sm tracking-[0.3em] text-muted-foreground uppercase mb-4">
-              Shop Collection
-            </p>
-            <h2 className="heading-display text-5xl md:text-6xl">
-              ALL PRODUCTS
-            </h2>
-          </div>
-          <div className="text-center py-20 border border-dashed border-border">
-            <p className="font-body text-muted-foreground mb-4">No products found</p>
-            <p className="font-body text-sm text-muted-foreground">
-              Products will appear here once added to your Shopify store
-            </p>
-          </div>
+      <section id="shop" className="py-32 bg-background">
+        <div className="container mx-auto px-6 text-center">
+          <p className="font-body text-muted-foreground">No products available</p>
         </div>
       </section>
     );
   }
 
   return (
-    <section id="shop" className="py-24">
+    <section id="shop" className="py-32 bg-background">
       <div className="container mx-auto px-6">
-        {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="font-body text-sm tracking-[0.3em] text-muted-foreground uppercase mb-4">
-            Shop Collection
+          <p className="font-body text-xs tracking-[0.4em] text-muted-foreground uppercase mb-4">
+            Collection
           </p>
-          <h2 className="heading-display text-5xl md:text-6xl">
-            ALL PRODUCTS
+          <h2 className="font-display text-3xl md:text-4xl font-light tracking-[0.1em] text-foreground">
+            The Essentials
           </h2>
         </div>
 
-        {/* Products Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {products.map((product, index) => (
             <ShopifyProductCard key={product.node.id} product={product} index={index} />
           ))}
