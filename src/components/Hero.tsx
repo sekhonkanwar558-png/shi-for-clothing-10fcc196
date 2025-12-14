@@ -1,7 +1,21 @@
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center pt-20 bg-background">
-      <div className="container mx-auto px-6">
+    <section className="relative min-h-screen flex flex-col justify-center pt-20 overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Dark Overlay for better text readability */}
+      <div className="absolute inset-0 bg-background/60 z-10" />
+      
+      <div className="container mx-auto px-6 relative z-20">
         <div className="max-w-3xl mx-auto text-center space-y-8 animate-fade-in">
           <p className="font-body text-xs tracking-[0.4em] text-muted-foreground uppercase">
             Premium Essentials
