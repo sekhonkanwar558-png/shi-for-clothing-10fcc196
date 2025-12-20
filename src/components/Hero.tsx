@@ -19,7 +19,7 @@ const Hero = () => {
       
       <div className="container mx-auto px-4 sm:px-6 relative z-20">
         <div className="max-w-3xl mx-auto text-center space-y-6 md:space-y-8">
-          <p className="font-body text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] text-muted-foreground uppercase opacity-0 animate-fade-in animation-delay-100 bg-primary-foreground">
+          <p className="font-body text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] text-muted-foreground uppercase opacity-0 animate-fade-in animation-delay-100 bg-black/0">
             ​A White T-Shirt Is All You Need
           
           </p>
