@@ -143,15 +143,15 @@ const ShopifyProductCard = ({ product, index = 0 }: ShopifyProductCardProps) => 
             <p className="font-body text-[10px] sm:text-xs tracking-[0.2em] text-muted-foreground text-center uppercase">
               Size
             </p>
-            <div className="flex justify-center gap-2 sm:gap-3">
+            <div className="flex justify-center gap-3 sm:gap-4">
               {sizes.map((size) => (
                 <button
                   key={size}
                   onClick={() => handleSizeSelect(size)}
-                  className={`w-11 h-11 sm:w-12 sm:h-12 border font-body text-xs sm:text-sm transition-all duration-200 touch-manipulation active:scale-95 ${
+                  className={`w-10 h-10 sm:w-11 sm:h-11 font-body text-xs sm:text-sm transition-all duration-200 touch-manipulation active:scale-95 ${
                     getSelectedSize() === size
-                      ? "border-foreground bg-foreground text-background"
-                      : "border-border hover:border-foreground text-foreground"
+                      ? "text-foreground font-medium underline underline-offset-4"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {size}
@@ -167,34 +167,34 @@ const ShopifyProductCard = ({ product, index = 0 }: ShopifyProductCardProps) => 
             Quantity
           </p>
           <div className="flex justify-center">
-            <div className="flex items-center border border-border">
+            <div className="flex items-center gap-4">
               <button
                 onClick={decrementQuantity}
-                className="p-3 sm:p-3.5 hover:bg-secondary transition-colors touch-manipulation active:bg-muted"
+                className="p-2 text-muted-foreground hover:text-foreground transition-colors touch-manipulation active:scale-95"
                 aria-label="Decrease quantity"
               >
-                <Minus size={14} className="sm:w-4 sm:h-4" />
+                <Minus size={16} />
               </button>
-              <span className="px-5 sm:px-6 font-body text-sm min-w-[50px] sm:min-w-[60px] text-center">
+              <span className="font-body text-base min-w-[40px] text-center text-foreground">
                 {quantity}
               </span>
               <button
                 onClick={incrementQuantity}
-                className="p-3 sm:p-3.5 hover:bg-secondary transition-colors touch-manipulation active:bg-muted"
+                className="p-2 text-muted-foreground hover:text-foreground transition-colors touch-manipulation active:scale-95"
                 aria-label="Increase quantity"
               >
-                <Plus size={14} className="sm:w-4 sm:h-4" />
+                <Plus size={16} />
               </button>
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="space-y-2.5 sm:space-y-3 pt-2">
+        <div className="flex flex-col items-center gap-4 pt-4">
           <button
             onClick={handleAddToCart}
             disabled={!selectedVariant?.availableForSale || isAddingToCart}
-            className="w-full py-3.5 sm:py-4 border border-foreground text-foreground font-body text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.15em] uppercase hover:bg-foreground hover:text-background transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation active:scale-[0.98]"
+            className="font-body text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.15em] uppercase text-foreground hover:text-muted-foreground transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation active:scale-[0.98] py-2"
           >
             {isAddingToCart ? (
               <Loader2 size={14} className="animate-spin" />
@@ -207,7 +207,7 @@ const ShopifyProductCard = ({ product, index = 0 }: ShopifyProductCardProps) => 
           <button
             onClick={handleBuyNow}
             disabled={!selectedVariant?.availableForSale || isBuyingNow}
-            className="w-full py-3.5 sm:py-4 bg-foreground text-background font-body text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.15em] uppercase hover:bg-foreground/90 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation active:scale-[0.98]"
+            className="font-body text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation active:scale-[0.98] py-2"
           >
             {isBuyingNow ? (
               <>
