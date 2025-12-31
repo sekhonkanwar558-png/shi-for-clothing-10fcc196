@@ -1,4 +1,3 @@
-import { ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
@@ -7,7 +6,7 @@ const Hero = () => {
   const goToShop = () => {
     navigate('/shop');
   };
-  return <section className="relative min-h-screen flex flex-col justify-center pt-16 md:pt-20 overflow-hidden bg-background">
+  return <section className="relative min-h-screen flex flex-col justify-center pt-24 md:pt-28 overflow-hidden bg-background">
       
       <div className="container mx-auto px-4 sm:px-6 relative z-20">
         <div className="max-w-3xl mx-auto text-center space-y-6 md:space-y-8">
@@ -32,13 +31,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator - centered */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center z-20 opacity-0 animate-fade-in animation-delay-500">
-        <button onClick={goToShop} className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors touch-manipulation" aria-label="Go to shop">
-          <span className="font-body text-[10px] tracking-[0.2em] uppercase hidden sm:block">Shop</span>
-          <ChevronDown size={20} className="animate-bounce" />
-        </button>
-      </div>
     </section>;
 };
 export default Hero;

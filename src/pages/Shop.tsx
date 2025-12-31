@@ -4,6 +4,7 @@ import { Loader2, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import DiscountBanner from "@/components/DiscountBanner";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 
 const Shop = () => {
@@ -30,9 +31,10 @@ const Shop = () => {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <DiscountBanner />
       <Navbar />
       
-      <section className="pt-24 md:pt-32 pb-16 md:pb-24">
+      <section className="pt-32 md:pt-40 pb-16 md:pb-24">
         <div className="container mx-auto px-4 sm:px-6">
           {/* Back Link */}
           <Link 
@@ -43,15 +45,6 @@ const Shop = () => {
             Back to Home
           </Link>
 
-          {/* Header */}
-          <div className="text-center mb-12 md:mb-16">
-            <p className="font-body text-[10px] sm:text-xs tracking-[0.3em] text-muted-foreground uppercase mb-4">
-              Premium Quality
-            </p>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-light tracking-[0.08em] text-foreground">
-              The Collection
-            </h1>
-          </div>
 
           {/* Products Grid */}
           {loading ? (
@@ -103,7 +96,7 @@ const Shop = () => {
                         {product.node.title}
                       </h3>
                       <p className="font-body text-sm text-muted-foreground">
-                        ₹{price.toFixed(0)}
+                        ₹{Math.round(price).toLocaleString('en-IN')}
                       </p>
                     </div>
                   </Link>
