@@ -1,5 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import ShopifyCart from "./ShopifyCart";
 import shiforLogo from "@/assets/shifor-logo.png";
 
@@ -46,24 +47,24 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between">
-        <a
-          href="#"
+        <Link
+          to="/"
           className="flex items-center gap-2 hover:opacity-70 transition-opacity touch-manipulation"
         >
           <img src={shiforLogo} alt="shi-for logo" className="h-6 sm:h-7 w-auto invert dark:invert-0" />
           <span className="font-display text-lg sm:text-xl tracking-[0.12em] sm:tracking-[0.15em] text-foreground">
             shi-for
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8 lg:gap-10">
-          <a
-            href="#shop"
+          <Link
+            to="/shop"
             className="font-body text-xs tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors uppercase relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-foreground after:transition-all after:duration-300 hover:after:w-full"
           >
             Shop
-          </a>
+          </Link>
           <ShopifyCart />
         </div>
 
@@ -88,13 +89,13 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto px-4 py-8 flex flex-col items-center gap-8">
-          <a
-            href="#shop"
+          <Link
+            to="/shop"
             className="font-body text-lg tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors uppercase touch-manipulation"
             onClick={() => setIsOpen(false)}
           >
             Shop
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
