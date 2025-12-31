@@ -1,12 +1,11 @@
 import { ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 const Hero = () => {
-  const scrollToShop = () => {
-    const shopSection = document.getElementById('shop');
-    if (shopSection) {
-      shopSection.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
+  const navigate = useNavigate();
+  
+  const goToShop = () => {
+    navigate('/shop');
   };
   return <section className="relative min-h-screen flex flex-col justify-center pt-16 md:pt-20 overflow-hidden bg-background">
       
@@ -26,7 +25,7 @@ const Hero = () => {
           </p>
 
           <div className="opacity-0 animate-fade-in animation-delay-400">
-            <button onClick={scrollToShop} className="inline-flex items-center justify-center px-8 sm:px-12 py-3.5 sm:py-4 text-foreground font-body text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:text-muted-foreground transition-all duration-300 active:scale-[0.98] touch-manipulation relative after:absolute after:bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-px after:bg-foreground after:transition-all after:duration-300 hover:after:w-1/2">
+            <button onClick={goToShop} className="inline-flex items-center justify-center px-8 sm:px-12 py-3.5 sm:py-4 text-foreground font-body text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase hover:text-muted-foreground transition-all duration-300 active:scale-[0.98] touch-manipulation relative after:absolute after:bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-px after:bg-foreground after:transition-all after:duration-300 hover:after:w-1/2">
               Shop Now
             </button>
           </div>
@@ -35,8 +34,8 @@ const Hero = () => {
 
       {/* Scroll indicator - centered */}
       <div className="absolute bottom-8 left-0 right-0 flex justify-center z-20 opacity-0 animate-fade-in animation-delay-500">
-        <button onClick={scrollToShop} className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors touch-manipulation" aria-label="Scroll to shop">
-          <span className="font-body text-[10px] tracking-[0.2em] uppercase hidden sm:block">Scroll</span>
+        <button onClick={goToShop} className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors touch-manipulation" aria-label="Go to shop">
+          <span className="font-body text-[10px] tracking-[0.2em] uppercase hidden sm:block">Shop</span>
           <ChevronDown size={20} className="animate-bounce" />
         </button>
       </div>
