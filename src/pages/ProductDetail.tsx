@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, ArrowLeft, Plus, Minus, Loader2 } from "luci
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import DiscountBanner from "@/components/DiscountBanner";
 import { storefrontApiRequest, ShopifyProduct, createStorefrontCheckout } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
@@ -111,8 +112,9 @@ const ProductDetail = () => {
   if (loading) {
     return (
       <main className="min-h-screen bg-background text-foreground">
+        <DiscountBanner />
         <Navbar />
-        <div className="flex justify-center items-center min-h-[60vh]">
+        <div className="flex justify-center items-center min-h-[60vh] pt-16">
           <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
         </div>
       </main>
@@ -122,8 +124,9 @@ const ProductDetail = () => {
   if (!product) {
     return (
       <main className="min-h-screen bg-background text-foreground">
+        <DiscountBanner />
         <Navbar />
-        <div className="flex flex-col justify-center items-center min-h-[60vh] gap-4">
+        <div className="flex flex-col justify-center items-center min-h-[60vh] pt-16 gap-4">
           <p className="text-muted-foreground">Product not found</p>
           <Link to="/shop" className="text-foreground underline underline-offset-4">
             Back to Shop
@@ -137,11 +140,15 @@ const ProductDetail = () => {
   const variants = product.variants.edges;
   const selectedVariant = selectedVariantIndex !== null ? variants[selectedVariantIndex]?.node : null;
   const price = parseFloat(selectedVariant?.price.amount || product.priceRange.minVariantPrice.amount);
-  const compareAtPrice = selectedVariant?.compareAtPrice 
+  const compareAtPriceValue = selectedVariant?.compareAtPrice 
     ? parseFloat(selectedVariant.compareAtPrice.amount) 
     : product.compareAtPriceRange?.minVariantPrice 
       ? parseFloat(product.compareAtPriceRange.minVariantPrice.amount) 
       : null;
+  // Only show compare price if it's greater than 0 and different from current price
+  const compareAtPrice = compareAtPriceValue && compareAtPriceValue > 0 && compareAtPriceValue > price 
+    ? compareAtPriceValue 
+    : null;
 
   const sizeOption = product.options.find(opt => opt.name.toLowerCase() === "size");
   const sizes = sizeOption?.values || [];
@@ -224,9 +231,10 @@ const ProductDetail = () => {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <DiscountBanner />
       <Navbar />
       
-      <section className="pt-20 md:pt-24 pb-16 md:pb-24">
+      <section className="pt-28 md:pt-32 pb-16 md:pb-24">
         <div className="container mx-auto px-4 sm:px-6">
           {/* Back Link */}
           <Link 
@@ -306,13 +314,13 @@ const ProductDetail = () => {
                   {product.title}
                 </h1>
                 <div className="flex items-center gap-3">
-                  {compareAtPrice && compareAtPrice > price && (
+                  {compareAtPrice && (
                     <span className="font-body text-lg text-muted-foreground line-through">
-                      ₹{compareAtPrice.toFixed(0)}
+                      ₹{Math.round(compareAtPrice).toLocaleString('en-IN')}
                     </span>
                   )}
                   <span className="font-body text-xl md:text-2xl text-foreground font-medium">
-                    ₹{price.toFixed(0)}
+                    ₹{Math.round(price).toLocaleString('en-IN')}
                   </span>
                 </div>
               </div>
@@ -320,12 +328,8 @@ const ProductDetail = () => {
               {/* Size Selection */}
               {sizes.length > 0 && (
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <p className="font-body text-sm text-foreground">
-                      Select Size
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-6 gap-2">
+                  <p className="font-body text-sm text-muted-foreground">Size</p>
+                  <div className="flex flex-wrap gap-3">
                     {sizes.map((size) => {
                       const variantForSize = variants.find(v => 
                         v.node.selectedOptions.some(opt => opt.value === size)
@@ -337,12 +341,12 @@ const ProductDetail = () => {
                           key={size}
                           onClick={() => isAvailable && handleSizeSelect(size)}
                           disabled={!isAvailable}
-                          className={`py-3 border font-body text-sm transition-all duration-200 ${
+                          className={`px-4 py-2 font-body text-sm transition-all duration-200 ${
                             getSelectedSize() === size
-                              ? "border-foreground bg-foreground text-background"
+                              ? "bg-foreground text-background"
                               : isAvailable
-                                ? "border-border hover:border-foreground text-foreground"
-                                : "border-border/50 text-muted-foreground/50 cursor-not-allowed line-through"
+                                ? "text-foreground hover:bg-foreground/10"
+                                : "text-muted-foreground/40 cursor-not-allowed line-through"
                           }`}
                         >
                           {size}
@@ -354,77 +358,76 @@ const ProductDetail = () => {
               )}
 
               {/* Quantity */}
-              <div className="flex items-center gap-4">
-                <p className="font-body text-sm text-foreground">Quantity</p>
-                <div className="flex items-center gap-3">
+              <div className="flex items-center gap-6">
+                <p className="font-body text-sm text-muted-foreground">Quantity</p>
+                <div className="flex items-center gap-4">
                   <button
                     onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                    className="p-1 text-muted-foreground hover:text-foreground transition-colors"
+                    className="p-2 text-foreground hover:text-muted-foreground transition-colors"
                   >
-                    <Minus size={16} />
+                    <Minus size={14} />
                   </button>
-                  <span className="font-body text-base min-w-[30px] text-center">{quantity}</span>
+                  <span className="font-body text-base min-w-[24px] text-center">{quantity}</span>
                   <button
                     onClick={() => setQuantity(q => q + 1)}
-                    className="p-1 text-muted-foreground hover:text-foreground transition-colors"
+                    className="p-2 text-foreground hover:text-muted-foreground transition-colors"
                   >
-                    <Plus size={16} />
+                    <Plus size={14} />
                   </button>
                 </div>
               </div>
 
-              {/* Add to Cart Button */}
-              <button
-                onClick={handleAddToCart}
-                disabled={!selectedVariant || isAddingToCart}
-                className="w-full py-4 bg-foreground text-background font-body text-sm tracking-[0.15em] uppercase hover:bg-foreground/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isAddingToCart ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <Loader2 size={16} className="animate-spin" />
-                    Adding...
-                  </span>
-                ) : selectedVariant ? (
-                  "Add to Cart"
-                ) : (
-                  "Select a Size"
-                )}
-              </button>
+              {/* Action Buttons */}
+              <div className="flex gap-4 pt-2">
+                <button
+                  onClick={handleAddToCart}
+                  disabled={!selectedVariant || isAddingToCart}
+                  className="flex-1 py-4 bg-foreground text-background font-body text-xs tracking-[0.15em] uppercase hover:bg-foreground/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isAddingToCart ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 size={14} className="animate-spin" />
+                      Adding...
+                    </span>
+                  ) : (
+                    "Add to Cart"
+                  )}
+                </button>
 
-              {/* Buy Now Button */}
-              <button
-                onClick={handleBuyNow}
-                disabled={!selectedVariant || isBuyingNow}
-                className="w-full py-4 border border-foreground text-foreground font-body text-sm tracking-[0.15em] uppercase hover:bg-foreground hover:text-background transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isBuyingNow ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <Loader2 size={16} className="animate-spin" />
-                    Processing...
-                  </span>
-                ) : (
-                  "Buy Now"
-                )}
-              </button>
+                <button
+                  onClick={handleBuyNow}
+                  disabled={!selectedVariant || isBuyingNow}
+                  className="flex-1 py-4 text-foreground font-body text-xs tracking-[0.15em] uppercase hover:bg-foreground/5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isBuyingNow ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 size={14} className="animate-spin" />
+                      Processing...
+                    </span>
+                  ) : (
+                    "Buy Now"
+                  )}
+                </button>
+              </div>
 
               {/* Stock Status */}
               {selectedVariant && (
-                <div className="flex items-center gap-2">
-                  <span className={`w-2 h-2 rounded-full ${selectedVariant.availableForSale ? "bg-green-500" : "bg-red-500"}`} />
-                  <span className="font-body text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 pt-2">
+                  <span className={`w-1.5 h-1.5 rounded-full ${selectedVariant.availableForSale ? "bg-green-600" : "bg-red-500"}`} />
+                  <span className="font-body text-xs text-muted-foreground tracking-wide">
                     {selectedVariant.availableForSale ? "In Stock" : "Out of Stock"}
                   </span>
                 </div>
               )}
 
               {/* Collapsible Sections */}
-              <div className="border-t border-border pt-6 space-y-0">
+              <div className="pt-8 space-y-0">
                 <Collapsible open={productDetailsOpen} onOpenChange={setProductDetailsOpen}>
-                  <CollapsibleTrigger className="flex items-center justify-between w-full py-4 border-b border-border font-body text-sm text-foreground hover:text-muted-foreground transition-colors">
+                  <CollapsibleTrigger className="flex items-center justify-between w-full py-4 border-t border-border/50 font-body text-xs tracking-wide text-foreground hover:text-muted-foreground transition-colors uppercase">
                     <span>Product Details</span>
-                    <Plus size={16} className={`transition-transform ${productDetailsOpen ? "rotate-45" : ""}`} />
+                    <Plus size={14} className={`transition-transform duration-200 ${productDetailsOpen ? "rotate-45" : ""}`} />
                   </CollapsibleTrigger>
-                  <CollapsibleContent className="py-4 border-b border-border">
+                  <CollapsibleContent className="pb-4">
                     <p className="font-body text-sm text-muted-foreground leading-relaxed">
                       {product.description || "Premium quality crafted with attention to detail."}
                     </p>
@@ -432,15 +435,15 @@ const ProductDetail = () => {
                 </Collapsible>
 
                 <Collapsible open={shippingOpen} onOpenChange={setShippingOpen}>
-                  <CollapsibleTrigger className="flex items-center justify-between w-full py-4 border-b border-border font-body text-sm text-foreground hover:text-muted-foreground transition-colors">
+                  <CollapsibleTrigger className="flex items-center justify-between w-full py-4 border-t border-border/50 font-body text-xs tracking-wide text-foreground hover:text-muted-foreground transition-colors uppercase">
                     <span>Shipping & Returns</span>
-                    <Plus size={16} className={`transition-transform ${shippingOpen ? "rotate-45" : ""}`} />
+                    <Plus size={14} className={`transition-transform duration-200 ${shippingOpen ? "rotate-45" : ""}`} />
                   </CollapsibleTrigger>
-                  <CollapsibleContent className="py-4 border-b border-border">
-                    <div className="font-body text-sm text-muted-foreground leading-relaxed space-y-2">
-                      <p>• Free shipping on orders over ₹999</p>
-                      <p>• Standard delivery: 5-7 business days</p>
-                      <p>• Easy returns within 7 days</p>
+                  <CollapsibleContent className="pb-4">
+                    <div className="font-body text-sm text-muted-foreground leading-relaxed space-y-1">
+                      <p>Free shipping on orders over ₹999</p>
+                      <p>Standard delivery: 5-7 business days</p>
+                      <p>Easy returns within 7 days</p>
                     </div>
                   </CollapsibleContent>
                 </Collapsible>

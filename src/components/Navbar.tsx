@@ -40,7 +40,7 @@ const Navbar = () => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 safe-top ${
+      className={`fixed top-8 left-0 right-0 z-40 transition-all duration-300 safe-top ${
         isScrolled 
           ? 'bg-background/98 backdrop-blur-md border-b border-border shadow-sm' 
           : 'bg-background/80 backdrop-blur-sm border-b border-transparent'
@@ -84,7 +84,7 @@ const Navbar = () => {
 
       {/* Mobile Navigation Overlay */}
       <div 
-        className={`md:hidden fixed inset-0 top-[57px] bg-background z-40 transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 top-[89px] bg-background z-40 transition-all duration-300 ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
