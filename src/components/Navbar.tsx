@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import ShopifyCart from "./ShopifyCart";
+import shiforLogo from "@/assets/shifor-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,9 +48,12 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between">
         <a
           href="#"
-          className="font-display text-lg sm:text-xl tracking-[0.12em] sm:tracking-[0.15em] text-foreground hover:opacity-70 transition-opacity touch-manipulation"
+          className="flex items-center gap-2 hover:opacity-70 transition-opacity touch-manipulation"
         >
-          shi-for
+          <img src={shiforLogo} alt="shi-for logo" className="h-6 sm:h-7 w-auto invert dark:invert-0" />
+          <span className="font-display text-lg sm:text-xl tracking-[0.12em] sm:tracking-[0.15em] text-foreground">
+            shi-for
+          </span>
         </a>
 
         {/* Desktop Navigation */}
