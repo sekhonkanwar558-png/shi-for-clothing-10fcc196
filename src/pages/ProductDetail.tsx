@@ -281,13 +281,13 @@ const ProductDetail = () => {
 
               {/* Thumbnail Strip */}
               {images.length > 1 && (
-                <div className="flex gap-2 overflow-x-auto pb-2">
+                <div className="flex gap-3 overflow-x-auto pb-2">
                   {images.map((img, index) => (
                     <button
                       key={index}
                       onClick={() => setSelectedImageIndex(index)}
-                      className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 overflow-hidden border-2 transition-colors ${
-                        selectedImageIndex === index ? "border-foreground" : "border-transparent"
+                      className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 overflow-hidden transition-opacity ${
+                        selectedImageIndex === index ? "opacity-100" : "opacity-40 hover:opacity-70"
                       }`}
                     >
                       <img

@@ -111,28 +111,28 @@ const ShopifyCart = () => {
                           {item.selectedOptions.map(opt => opt.value).join(' • ')}
                         </p>
                         <p className="font-body text-xs sm:text-sm mt-0.5">
-                          ₹{parseFloat(item.price.amount).toFixed(0)}
+                          ₹{Math.round(parseFloat(item.price.amount)).toLocaleString('en-IN')}
                         </p>
                       </div>
 
                       <div className="flex items-center justify-between mt-2">
-                        <div className="flex items-center border border-border">
+                        <div className="flex items-center gap-3">
                           <button
                             onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
-                            className="p-1.5 sm:p-2 hover:bg-muted transition-colors touch-manipulation active:bg-accent"
+                            className="p-1.5 text-muted-foreground hover:text-foreground transition-colors touch-manipulation"
                             aria-label="Decrease quantity"
                           >
-                            <Minus size={12} className="sm:w-[14px] sm:h-[14px]" />
+                            <Minus size={14} />
                           </button>
-                          <span className="px-3 sm:px-4 font-body text-xs sm:text-sm">
+                          <span className="font-body text-sm min-w-[20px] text-center">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-                            className="p-1.5 sm:p-2 hover:bg-muted transition-colors touch-manipulation active:bg-accent"
+                            className="p-1.5 text-muted-foreground hover:text-foreground transition-colors touch-manipulation"
                             aria-label="Increase quantity"
                           >
-                            <Plus size={12} className="sm:w-[14px] sm:h-[14px]" />
+                            <Plus size={14} />
                           </button>
                         </div>
 
@@ -155,7 +155,7 @@ const ShopifyCart = () => {
               <div className="flex justify-between items-center">
                 <span className="font-body text-sm text-muted-foreground">Subtotal</span>
                 <span className="font-display text-xl sm:text-2xl">
-                  ₹{total.toFixed(0)}
+                  ₹{Math.round(total).toLocaleString('en-IN')}
                 </span>
               </div>
               <p className="font-body text-[10px] sm:text-xs text-muted-foreground">
