@@ -8,14 +8,7 @@ const Hero = () => {
       });
     }
   };
-  return <section className="relative min-h-screen flex flex-col justify-center pt-16 md:pt-20 overflow-hidden">
-      {/* Video Background with slow zoom */}
-      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover z-0 animate-slow-zoom">
-        <source src="/hero-bg.mp4" type="video/mp4" />
-      </video>
-      
-      {/* Gradient Overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/50 to-background/70 z-10" />
+  return <section className="relative min-h-screen flex flex-col justify-center pt-16 md:pt-20 overflow-hidden bg-background">
       
       <div className="container mx-auto px-4 sm:px-6 relative z-20">
         <div className="max-w-3xl mx-auto text-center space-y-6 md:space-y-8">
