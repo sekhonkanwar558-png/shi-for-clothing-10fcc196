@@ -11,6 +11,7 @@ const Shop = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -29,73 +30,88 @@ const Shop = () => {
     loadProducts();
   }, []);
 
+  const handleImageLoad = (productId: string) => {
+    setImagesLoaded(prev => ({ ...prev, [productId]: true }));
+  };
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <DiscountBanner />
       <Navbar />
       
-      <section className="pt-32 md:pt-40 pb-16 md:pb-24">
-        <div className="container mx-auto px-4 sm:px-6">
-          {/* Back Link */}
-          <Link 
-            to="/" 
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 font-body text-sm tracking-wide"
-          >
-            <ArrowLeft size={16} />
-            Back to Home
-          </Link>
-
+      <section className="pt-36 md:pt-44 pb-20 md:pb-32">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+          {/* Header */}
+          <div className="max-w-4xl mb-12 md:mb-16">
+            <Link 
+              to="/" 
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 text-micro font-medium"
+            >
+              <ArrowLeft size={14} />
+              Back to Home
+            </Link>
+            
+            <h1 className="font-display text-section text-foreground">
+              The Collection
+            </h1>
+          </div>
 
           {/* Products Grid */}
           {loading ? (
-            <div className="flex justify-center items-center py-20">
-              <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+            <div className="flex justify-center items-center py-24">
+              <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
             </div>
           ) : error ? (
-            <div className="text-center py-20">
-              <p className="text-muted-foreground">{error}</p>
+            <div className="text-center py-24">
+              <p className="text-muted-foreground text-body">{error}</p>
             </div>
           ) : products.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-muted-foreground font-body text-sm tracking-wide">
+            <div className="text-center py-24">
+              <p className="text-muted-foreground text-body">
                 No products available at the moment.
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12 md:gap-x-8 md:gap-y-16">
               {products.map((product, index) => {
                 const image = product.node.images.edges[0]?.node;
                 const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
+                const productId = product.node.id;
+                const isLoaded = imagesLoaded[productId];
 
                 return (
                   <Link
-                    key={product.node.id}
+                    key={productId}
                     to={`/product/${product.node.handle}`}
-                    className="group opacity-0 animate-fade-in-up"
+                    className="group opacity-0 animate-fade-in"
                     style={{ animationDelay: `${0.1 + index * 0.05}s`, animationFillMode: 'forwards' }}
                   >
-                    {/* Product Image */}
-                    <div className="aspect-square relative overflow-hidden mb-4 bg-secondary">
-                      {image ? (
+                    {/* Product Image with progressive loading */}
+                    <div className="aspect-[3/4] relative overflow-hidden mb-5 bg-muted">
+                      {image && (
                         <img
                           src={image.url}
                           alt={image.altText || product.node.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          onLoad={() => handleImageLoad(productId)}
+                          className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${
+                            isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-md'
+                          }`}
                           loading="lazy"
                         />
-                      ) : (
+                      )}
+                      {!image && (
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="font-body text-xs text-muted-foreground">No image</span>
+                          <span className="text-micro text-muted-foreground">No image</span>
                         </div>
                       )}
                     </div>
 
-                    {/* Product Info */}
-                    <div className="text-center space-y-1">
-                      <h3 className="font-body text-sm tracking-wide text-foreground group-hover:text-muted-foreground transition-colors">
+                    {/* Product Info - left aligned */}
+                    <div className="space-y-1.5">
+                      <h3 className="text-body font-medium text-foreground group-hover:text-muted-foreground transition-colors duration-300">
                         {product.node.title}
                       </h3>
-                      <p className="font-body text-sm text-muted-foreground">
+                      <p className="text-body-sm text-muted-foreground">
                         ₹{Math.round(price).toLocaleString('en-IN')}
                       </p>
                     </div>

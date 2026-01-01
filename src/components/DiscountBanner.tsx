@@ -44,40 +44,24 @@ const DiscountBanner = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-foreground text-background overflow-hidden">
-      <div className="animate-marquee whitespace-nowrap py-2">
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          Use code <span className="font-medium">{discountCode.code}</span> for {discountCode.percentage}% off
+      <div className="animate-marquee whitespace-nowrap py-2.5">
+        <span className="inline-block mx-8 text-label">
+          Use code <span className="font-semibold">{discountCode.code}</span> for {discountCode.percentage}% off
         </span>
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          •
+        <span className="inline-block mx-8 text-label">•</span>
+        <span className="inline-block mx-8 text-label">Free shipping on orders over ₹999</span>
+        <span className="inline-block mx-8 text-label">•</span>
+        <span className="inline-block mx-8 text-label">
+          Use code <span className="font-semibold">{discountCode.code}</span> for {discountCode.percentage}% off
         </span>
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          Free shipping on orders over ₹999
+        <span className="inline-block mx-8 text-label">•</span>
+        <span className="inline-block mx-8 text-label">Free shipping on orders over ₹999</span>
+        <span className="inline-block mx-8 text-label">•</span>
+        <span className="inline-block mx-8 text-label">
+          Use code <span className="font-semibold">{discountCode.code}</span> for {discountCode.percentage}% off
         </span>
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          •
-        </span>
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          Use code <span className="font-medium">{discountCode.code}</span> for {discountCode.percentage}% off
-        </span>
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          •
-        </span>
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          Free shipping on orders over ₹999
-        </span>
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          •
-        </span>
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          Use code <span className="font-medium">{discountCode.code}</span> for {discountCode.percentage}% off
-        </span>
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          •
-        </span>
-        <span className="inline-block mx-8 font-body text-xs tracking-[0.2em] uppercase">
-          Free shipping on orders over ₹999
-        </span>
+        <span className="inline-block mx-8 text-label">•</span>
+        <span className="inline-block mx-8 text-label">Free shipping on orders over ₹999</span>
       </div>
     </div>
   );
