@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowLeft, Plus, Minus, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -76,7 +76,6 @@ const isMobileDevice = () => {
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
-  const navigate = useNavigate();
   const addItem = useCartStore((state) => state.addItem);
   
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
@@ -88,6 +87,7 @@ const ProductDetail = () => {
   const [isBuyingNow, setIsBuyingNow] = useState(false);
   const [productDetailsOpen, setProductDetailsOpen] = useState(false);
   const [shippingOpen, setShippingOpen] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -109,13 +109,17 @@ const ProductDetail = () => {
     loadProduct();
   }, [handle]);
 
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [selectedImageIndex]);
+
   if (loading) {
     return (
       <main className="min-h-screen bg-background text-foreground">
         <DiscountBanner />
         <Navbar />
         <div className="flex justify-center items-center min-h-[60vh] pt-16">
-          <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+          <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
         </div>
       </main>
     );
@@ -126,9 +130,9 @@ const ProductDetail = () => {
       <main className="min-h-screen bg-background text-foreground">
         <DiscountBanner />
         <Navbar />
-        <div className="flex flex-col justify-center items-center min-h-[60vh] pt-16 gap-4">
-          <p className="text-muted-foreground">Product not found</p>
-          <Link to="/shop" className="text-foreground underline underline-offset-4">
+        <div className="flex flex-col justify-center items-center min-h-[60vh] pt-16 gap-6">
+          <p className="text-muted-foreground text-body">Product not found</p>
+          <Link to="/shop" className="btn-secondary">
             Back to Shop
           </Link>
         </div>
@@ -145,7 +149,6 @@ const ProductDetail = () => {
     : product.compareAtPriceRange?.minVariantPrice 
       ? parseFloat(product.compareAtPriceRange.minVariantPrice.amount) 
       : null;
-  // Only show compare price if it's greater than 0 and different from current price
   const compareAtPrice = compareAtPriceValue && compareAtPriceValue > 0 && compareAtPriceValue > price 
     ? compareAtPriceValue 
     : null;
@@ -234,27 +237,30 @@ const ProductDetail = () => {
       <DiscountBanner />
       <Navbar />
       
-      <section className="pt-28 md:pt-32 pb-16 md:pb-24">
-        <div className="container mx-auto px-4 sm:px-6">
+      <section className="pt-32 md:pt-40 pb-20 md:pb-32">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           {/* Back Link */}
           <Link 
             to="/shop" 
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6 md:mb-8 font-body text-sm tracking-wide"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 md:mb-12 text-micro font-medium"
           >
-            <ArrowLeft size={16} />
+            <ArrowLeft size={14} />
             Back to Shop
           </Link>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
             {/* Left: Image Gallery */}
             <div className="space-y-4">
               {/* Main Image */}
-              <div className="relative aspect-square bg-secondary overflow-hidden">
+              <div className="relative aspect-[3/4] bg-muted overflow-hidden">
                 {images[selectedImageIndex] && (
                   <img
                     src={images[selectedImageIndex].node.url}
                     alt={images[selectedImageIndex].node.altText || product.title}
-                    className="w-full h-full object-cover"
+                    onLoad={() => setImageLoaded(true)}
+                    className={`w-full h-full object-cover transition-all duration-500 ${
+                      imageLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-md'
+                    }`}
                   />
                 )}
                 
@@ -263,17 +269,17 @@ const ProductDetail = () => {
                   <>
                     <button
                       onClick={handlePrevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-foreground/60 hover:text-foreground transition-colors"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-foreground/40 hover:text-foreground transition-colors duration-300"
                       aria-label="Previous image"
                     >
-                      <ChevronLeft size={32} />
+                      <ChevronLeft size={28} strokeWidth={1.5} />
                     </button>
                     <button
                       onClick={handleNextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-foreground/60 hover:text-foreground transition-colors"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-foreground/40 hover:text-foreground transition-colors duration-300"
                       aria-label="Next image"
                     >
-                      <ChevronRight size={32} />
+                      <ChevronRight size={28} strokeWidth={1.5} />
                     </button>
                   </>
                 )}
@@ -286,8 +292,8 @@ const ProductDetail = () => {
                     <button
                       key={index}
                       onClick={() => setSelectedImageIndex(index)}
-                      className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 overflow-hidden transition-opacity ${
-                        selectedImageIndex === index ? "opacity-100" : "opacity-40 hover:opacity-70"
+                      className={`flex-shrink-0 w-16 h-20 md:w-20 md:h-24 overflow-hidden transition-opacity duration-300 ${
+                        selectedImageIndex === index ? "opacity-100" : "opacity-30 hover:opacity-60"
                       }`}
                     >
                       <img
@@ -301,25 +307,25 @@ const ProductDetail = () => {
               )}
 
               {/* Image Counter */}
-              <p className="font-body text-sm text-muted-foreground">
+              <p className="text-micro text-muted-foreground">
                 {selectedImageIndex + 1} / {images.length}
               </p>
             </div>
 
             {/* Right: Product Info */}
-            <div className="space-y-6">
+            <div className="space-y-8">
               {/* Title & Price */}
-              <div className="space-y-2">
-                <h1 className="font-display text-2xl md:text-3xl font-light tracking-wide text-foreground">
+              <div className="space-y-4">
+                <h1 className="font-display text-section text-foreground">
                   {product.title}
                 </h1>
-                <div className="flex items-center gap-3">
+                <div className="flex items-baseline gap-3">
                   {compareAtPrice && (
-                    <span className="font-body text-lg text-muted-foreground line-through">
+                    <span className="text-body text-muted-foreground line-through">
                       ₹{Math.round(compareAtPrice).toLocaleString('en-IN')}
                     </span>
                   )}
-                  <span className="font-body text-xl md:text-2xl text-foreground font-medium">
+                  <span className="text-2xl md:text-3xl font-display text-foreground">
                     ₹{Math.round(price).toLocaleString('en-IN')}
                   </span>
                 </div>
@@ -328,25 +334,26 @@ const ProductDetail = () => {
               {/* Size Selection */}
               {sizes.length > 0 && (
                 <div className="space-y-4">
-                  <p className="font-body text-sm text-muted-foreground">Size</p>
+                  <p className="text-label text-muted-foreground">Size</p>
                   <div className="flex flex-wrap gap-3">
                     {sizes.map((size) => {
                       const variantForSize = variants.find(v => 
                         v.node.selectedOptions.some(opt => opt.value === size)
                       );
                       const isAvailable = variantForSize?.node.availableForSale ?? false;
+                      const isSelected = getSelectedSize() === size;
                       
                       return (
                         <button
                           key={size}
                           onClick={() => isAvailable && handleSizeSelect(size)}
                           disabled={!isAvailable}
-                          className={`px-4 py-2 font-body text-sm transition-all duration-200 ${
-                            getSelectedSize() === size
-                              ? "bg-foreground text-background"
+                          className={`px-5 py-3 text-sm font-medium rounded-lg transition-all duration-300 ${
+                            isSelected
+                              ? "bg-foreground text-background shadow-button"
                               : isAvailable
-                                ? "text-foreground hover:bg-foreground/10"
-                                : "text-muted-foreground/40 cursor-not-allowed line-through"
+                                ? "bg-muted text-foreground hover:bg-muted/70"
+                                : "bg-muted/50 text-muted-foreground/40 cursor-not-allowed line-through"
                           }`}
                         >
                           {size}
@@ -358,35 +365,35 @@ const ProductDetail = () => {
               )}
 
               {/* Quantity */}
-              <div className="flex items-center gap-6">
-                <p className="font-body text-sm text-muted-foreground">Quantity</p>
+              <div className="flex items-center gap-8">
+                <p className="text-label text-muted-foreground">Quantity</p>
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                    className="p-2 text-foreground hover:text-muted-foreground transition-colors"
+                    className="p-2.5 rounded-lg bg-muted text-foreground hover:bg-muted/70 transition-colors duration-300"
                   >
-                    <Minus size={14} />
+                    <Minus size={16} />
                   </button>
-                  <span className="font-body text-base min-w-[24px] text-center">{quantity}</span>
+                  <span className="text-body font-medium min-w-[32px] text-center">{quantity}</span>
                   <button
                     onClick={() => setQuantity(q => q + 1)}
-                    className="p-2 text-foreground hover:text-muted-foreground transition-colors"
+                    className="p-2.5 rounded-lg bg-muted text-foreground hover:bg-muted/70 transition-colors duration-300"
                   >
-                    <Plus size={14} />
+                    <Plus size={16} />
                   </button>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-4 pt-2">
+              <div className="flex gap-4 pt-4">
                 <button
                   onClick={handleAddToCart}
                   disabled={!selectedVariant || isAddingToCart}
-                  className="flex-1 py-4 bg-foreground text-background font-body text-xs tracking-[0.15em] uppercase hover:bg-foreground/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   {isAddingToCart ? (
                     <span className="flex items-center justify-center gap-2">
-                      <Loader2 size={14} className="animate-spin" />
+                      <Loader2 size={16} className="animate-spin" />
                       Adding...
                     </span>
                   ) : (
@@ -397,11 +404,11 @@ const ProductDetail = () => {
                 <button
                   onClick={handleBuyNow}
                   disabled={!selectedVariant || isBuyingNow}
-                  className="flex-1 py-4 text-foreground font-body text-xs tracking-[0.15em] uppercase hover:bg-foreground/5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 btn-secondary disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isBuyingNow ? (
                     <span className="flex items-center justify-center gap-2">
-                      <Loader2 size={14} className="animate-spin" />
+                      <Loader2 size={16} className="animate-spin" />
                       Processing...
                     </span>
                   ) : (
@@ -412,35 +419,35 @@ const ProductDetail = () => {
 
               {/* Stock Status */}
               {selectedVariant && (
-                <div className="flex items-center gap-2 pt-2">
-                  <span className={`w-1.5 h-1.5 rounded-full ${selectedVariant.availableForSale ? "bg-green-600" : "bg-red-500"}`} />
-                  <span className="font-body text-xs text-muted-foreground tracking-wide">
+                <div className="flex items-center gap-2">
+                  <span className={`w-2 h-2 rounded-full ${selectedVariant.availableForSale ? "bg-green-500" : "bg-red-400"}`} />
+                  <span className="text-micro text-muted-foreground">
                     {selectedVariant.availableForSale ? "In Stock" : "Out of Stock"}
                   </span>
                 </div>
               )}
 
               {/* Collapsible Sections */}
-              <div className="pt-8 space-y-0">
+              <div className="pt-6 space-y-0 border-t border-border/50">
                 <Collapsible open={productDetailsOpen} onOpenChange={setProductDetailsOpen}>
-                  <CollapsibleTrigger className="flex items-center justify-between w-full py-4 border-t border-border/50 font-body text-xs tracking-wide text-foreground hover:text-muted-foreground transition-colors uppercase">
+                  <CollapsibleTrigger className="flex items-center justify-between w-full py-5 text-label text-foreground hover:text-muted-foreground transition-colors duration-300">
                     <span>Product Details</span>
-                    <Plus size={14} className={`transition-transform duration-200 ${productDetailsOpen ? "rotate-45" : ""}`} />
+                    <Plus size={14} className={`transition-transform duration-300 ${productDetailsOpen ? "rotate-45" : ""}`} />
                   </CollapsibleTrigger>
-                  <CollapsibleContent className="pb-4">
-                    <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                  <CollapsibleContent className="pb-5">
+                    <p className="text-body-sm text-muted-foreground leading-relaxed">
                       {product.description || "Premium quality crafted with attention to detail."}
                     </p>
                   </CollapsibleContent>
                 </Collapsible>
 
                 <Collapsible open={shippingOpen} onOpenChange={setShippingOpen}>
-                  <CollapsibleTrigger className="flex items-center justify-between w-full py-4 border-t border-border/50 font-body text-xs tracking-wide text-foreground hover:text-muted-foreground transition-colors uppercase">
+                  <CollapsibleTrigger className="flex items-center justify-between w-full py-5 border-t border-border/50 text-label text-foreground hover:text-muted-foreground transition-colors duration-300">
                     <span>Shipping & Returns</span>
-                    <Plus size={14} className={`transition-transform duration-200 ${shippingOpen ? "rotate-45" : ""}`} />
+                    <Plus size={14} className={`transition-transform duration-300 ${shippingOpen ? "rotate-45" : ""}`} />
                   </CollapsibleTrigger>
-                  <CollapsibleContent className="pb-4">
-                    <div className="font-body text-sm text-muted-foreground leading-relaxed space-y-1">
+                  <CollapsibleContent className="pb-5">
+                    <div className="text-body-sm text-muted-foreground leading-relaxed space-y-2">
                       <p>Free shipping on orders over ₹999</p>
                       <p>Standard delivery: 5-7 business days</p>
                       <p>Easy returns within 7 days</p>

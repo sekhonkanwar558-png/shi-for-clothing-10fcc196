@@ -43,38 +43,45 @@ const NewsletterSection = () => {
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-foreground text-background">
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="max-w-2xl mx-auto text-center space-y-6">
-          <p className="font-body text-[10px] sm:text-xs tracking-[0.3em] text-background/60 uppercase">
+    <section className="section-padding bg-foreground text-background">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="max-w-4xl">
+          {/* Left-aligned content */}
+          <p className="text-label text-background/50 mb-8">
             Stay Connected
           </p>
           
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl tracking-[0.08em]">
-            Become Part of Our Brand
-          </h2>
-          
-          <p className="font-body text-sm sm:text-base text-background/70 leading-relaxed font-light max-w-md mx-auto">
-            Sign up for updates on new drops, exclusive offers, and the shi-for journey.
-          </p>
-          
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-4">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-3 bg-background/10 border border-background/20 text-background placeholder:text-background/50 font-body text-sm tracking-wide focus:outline-none focus:border-background/50 transition-colors"
-              required
-            />
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="px-8 py-3 bg-background text-foreground font-body text-xs tracking-[0.15em] uppercase hover:bg-background/90 transition-colors disabled:opacity-50 touch-manipulation"
-            >
-              {isLoading ? "Joining..." : "Join"}
-            </button>
-          </form>
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+            {/* Left Column - Text */}
+            <div className="space-y-6">
+              <h2 className="font-display text-section text-background">
+                Become Part of Our Brand
+              </h2>
+              
+              <p className="text-body text-background/70 font-light">
+                Sign up for updates on new drops, exclusive offers, and the shi-for journey.
+              </p>
+            </div>
+            
+            {/* Right Column - Form */}
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 pt-2">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="w-full px-5 py-4 bg-background/10 border border-background/20 text-background placeholder:text-background/40 text-body rounded-lg focus:outline-none focus:border-background/50 transition-colors"
+                required
+              />
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full md:w-auto px-8 py-4 bg-background text-foreground font-medium text-sm tracking-wide rounded-lg hover:bg-background/90 transition-all duration-300 disabled:opacity-50 touch-manipulation shadow-button hover:shadow-button-hover"
+              >
+                {isLoading ? "Joining..." : "Join the Family"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
