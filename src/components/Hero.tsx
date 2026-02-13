@@ -22,7 +22,7 @@ const Hero = () => {
           </div>
           
           {/* Hero Headline - Sequoia serif style */}
-          <h1 className="font-display text-hero opacity-0 animate-fade-in animation-delay-200 text-foreground italic">
+          <h1 className="font-display text-hero opacity-0 animate-fade-in animation-delay-200 text-primary italic">
             shi-for
           </h1>
           
