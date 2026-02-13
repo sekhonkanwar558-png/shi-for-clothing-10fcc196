@@ -7,32 +7,6 @@ interface DiscountCode {
   endsAt: string | null;
 }
 
-// Query to get automatic discounts from Shopify
-const AUTOMATIC_DISCOUNTS_QUERY = `
-  query GetAutomaticDiscounts {
-    automaticDiscountNodes(first: 5) {
-      edges {
-        node {
-          id
-          automaticDiscount {
-            ... on DiscountAutomaticBasic {
-              title
-              endsAt
-              customerGets {
-                value {
-                  ... on DiscountPercentage {
-                    percentage
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 const DiscountBanner = () => {
   const [discountCode] = useState<DiscountCode>({
     code: "SHINEW",
@@ -44,24 +18,17 @@ const DiscountBanner = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-foreground text-background overflow-hidden">
-      <div className="animate-marquee whitespace-nowrap py-2.5">
-        <span className="inline-block mx-8 text-label">
-          Use code <span className="font-semibold">{discountCode.code}</span> for {discountCode.percentage}% off
-        </span>
-        <span className="inline-block mx-8 text-label">•</span>
-        <span className="inline-block mx-8 text-label">Free shipping on orders over ₹999</span>
-        <span className="inline-block mx-8 text-label">•</span>
-        <span className="inline-block mx-8 text-label">
-          Use code <span className="font-semibold">{discountCode.code}</span> for {discountCode.percentage}% off
-        </span>
-        <span className="inline-block mx-8 text-label">•</span>
-        <span className="inline-block mx-8 text-label">Free shipping on orders over ₹999</span>
-        <span className="inline-block mx-8 text-label">•</span>
-        <span className="inline-block mx-8 text-label">
-          Use code <span className="font-semibold">{discountCode.code}</span> for {discountCode.percentage}% off
-        </span>
-        <span className="inline-block mx-8 text-label">•</span>
-        <span className="inline-block mx-8 text-label">Free shipping on orders over ₹999</span>
+      <div className="animate-marquee whitespace-nowrap py-2">
+        {[...Array(4)].map((_, i) => (
+          <span key={i} className="inline-block">
+            <span className="inline-block mx-8 text-[10px] tracking-[0.15em] uppercase font-medium">
+              Use code <span className="font-semibold">{discountCode.code}</span> for {discountCode.percentage}% off
+            </span>
+            <span className="inline-block mx-8 text-[10px] tracking-[0.15em] uppercase">·</span>
+            <span className="inline-block mx-8 text-[10px] tracking-[0.15em] uppercase font-medium">Free shipping on orders over ₹999</span>
+            <span className="inline-block mx-8 text-[10px] tracking-[0.15em] uppercase">·</span>
+          </span>
+        ))}
       </div>
     </div>
   );

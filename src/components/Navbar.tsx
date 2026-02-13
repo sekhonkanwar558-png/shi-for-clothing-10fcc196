@@ -2,7 +2,7 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ShopifyCart from "./ShopifyCart";
-import shiforLogo from "@/assets/shifor-logo.png";
+import onigiriLogo from "@/assets/onigiri-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +17,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsOpen(false);
@@ -26,7 +25,6 @@ const Navbar = () => {
     return () => document.removeEventListener('keydown', handleEscape);
   }, []);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -40,19 +38,19 @@ const Navbar = () => {
 
   return (
     <nav 
-      className={`fixed top-8 left-0 right-0 z-40 transition-all duration-300 safe-top ${
+      className={`fixed top-8 left-0 right-0 z-40 transition-all duration-500 safe-top ${
         isScrolled 
-          ? 'bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm' 
-          : 'bg-background/80 backdrop-blur-sm border-b border-transparent'
+          ? 'bg-background/95 backdrop-blur-md border-b border-foreground/5' 
+          : 'bg-transparent border-b border-transparent'
       }`}
     >
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-4 sm:py-5 flex items-center justify-between">
         <Link
           to="/"
-          className="flex items-center gap-2.5 hover:opacity-70 transition-opacity touch-manipulation"
+          className="flex items-center gap-2.5 hover:opacity-70 transition-opacity duration-300 touch-manipulation"
         >
-          <img src={shiforLogo} alt="shi-for logo" className="h-6 sm:h-7 w-auto invert dark:invert-0" />
-          <span className="font-display text-lg sm:text-xl tracking-tight text-foreground">
+          <img src={onigiriLogo} alt="shi-for onigiri logo" className="h-8 sm:h-9 w-auto" />
+          <span className="font-display text-xl sm:text-2xl text-foreground">
             shi-for
           </span>
         </Link>
@@ -61,9 +59,9 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-10">
           <Link
             to="/shop"
-            className="nav-link text-micro font-medium"
+            className="nav-link text-label"
           >
-            Shop
+            SHOP
           </Link>
           <ShopifyCart />
         </div>
@@ -72,7 +70,7 @@ const Navbar = () => {
         <div className="flex items-center gap-3 md:hidden">
           <ShopifyCart />
           <button
-            className="p-2 text-foreground hover:text-muted-foreground transition-colors touch-manipulation"
+            className="p-2 text-foreground hover:opacity-60 transition-opacity duration-300 touch-manipulation"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
             aria-expanded={isOpen}
@@ -82,16 +80,19 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Sequoia-style thin line under nav */}
+      <div className={`w-full h-px transition-colors duration-500 ${isScrolled ? 'bg-foreground/8' : 'bg-transparent'}`} />
+
       {/* Mobile Navigation Overlay */}
       <div 
-        className={`md:hidden fixed inset-0 top-[89px] bg-background z-40 transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 top-[73px] bg-background z-40 transition-all duration-300 ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
-        <div className="container mx-auto px-6 py-12 flex flex-col items-start gap-8">
+        <div className="container mx-auto px-6 py-16 flex flex-col items-start gap-8">
           <Link
             to="/shop"
-            className="font-display text-2xl text-foreground hover:text-muted-foreground transition-colors touch-manipulation"
+            className="font-display text-3xl text-foreground hover:opacity-60 transition-opacity duration-300 touch-manipulation"
             onClick={() => setIsOpen(false)}
           >
             Shop
