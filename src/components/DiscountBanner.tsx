@@ -17,7 +17,7 @@ const DiscountBanner = () => {
   if (!discountCode) return null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-foreground text-background overflow-hidden">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-primary text-primary-foreground overflow-hidden">
       <div className="animate-marquee whitespace-nowrap py-2">
         {[...Array(4)].map((_, i) => (
           <span key={i} className="inline-block">

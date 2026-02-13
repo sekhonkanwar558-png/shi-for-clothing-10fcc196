@@ -1,4 +1,4 @@
-import shiforLogo from "@/assets/shifor-logo.png";
+import onigiriLogo from "@/assets/onigiri-logo.png";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -14,9 +14,9 @@ const Footer = () => {
               className="flex items-center gap-3 hover:opacity-70 transition-opacity touch-manipulation w-fit"
             >
               <img 
-                src={shiforLogo} 
+                src={onigiriLogo} 
                 alt="shi-for logo" 
-                className="h-10 sm:h-12 w-auto invert dark:invert-0" 
+                className="h-10 sm:h-12 w-auto" 
               />
               <span className="font-display text-xl sm:text-2xl tracking-tight text-foreground">
                 shi-for
