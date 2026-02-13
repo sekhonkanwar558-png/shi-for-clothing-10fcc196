@@ -1,4 +1,4 @@
-import shiforLogo from "@/assets/shifor-logo.png";
+import onigiriLogo from "@/assets/onigiri-logo.png";
 
 const AboutSection = () => {
   return (
@@ -14,9 +14,9 @@ const AboutSection = () => {
             {/* Logo Column */}
             <div className="flex flex-col items-start space-y-6">
               <img 
-                src={shiforLogo} 
-                alt="shi-for mountain logo" 
-                className="h-24 sm:h-32 w-auto invert dark:invert-0"
+                src={onigiriLogo} 
+                alt="shi-for onigiri logo" 
+                className="h-24 sm:h-32 w-auto"
               />
               <h2 className="font-display text-section text-foreground">
                 shi-for

@@ -28,7 +28,7 @@ const Hero = () => {
           
           {/* Description */}
           <p className="text-body-lg text-muted-foreground max-w-lg mx-auto opacity-0 animate-fade-in animation-delay-300 font-light leading-relaxed">
-            Pure simplicity. Exceptional quality. Plain white t-shirts crafted with the finest fabrics and meticulous attention to detail.
+            From inspiration into reality — authored with purpose, worn with meaning. Forged in stoicism. Inspired by Japan. Created to evolve humanity in peace.
           </p>
 
           {/* CTA Button */}

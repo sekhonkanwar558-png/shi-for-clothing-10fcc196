@@ -16,7 +16,7 @@
     --popover: 30 20% 98%;
     --popover-foreground: 30 10% 15%;
 
-    --primary: 30 10% 15%;
+    --primary: 7 53% 50%;
     --primary-foreground: 30 25% 96%;
 
     --secondary: 30 15% 93%;
@@ -33,7 +33,7 @@
 
     --border: 30 10% 88%;
     --input: 30 10% 88%;
-    --ring: 30 10% 15%;
+    --ring: 7 53% 50%;
 
     --radius: 0.5rem;
 
@@ -197,7 +197,7 @@
 
   /* Primary CTA */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-foreground text-background font-medium text-sm tracking-wide transition-all duration-300 ease-out;
+    @apply inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-medium text-sm tracking-wide transition-all duration-300 ease-out;
     border-radius: 8px;
     box-shadow: var(--shadow-button);
   }
