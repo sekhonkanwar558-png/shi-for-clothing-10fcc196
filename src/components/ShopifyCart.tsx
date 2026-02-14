@@ -7,11 +7,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
 
-// Detect mobile device
 const isMobileDevice = () => {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
 };
@@ -23,7 +21,6 @@ const ShopifyCart = () => {
 
   const itemCount = totalItems();
   const total = totalPrice();
-  const currencyCode = items[0]?.price.currencyCode || "INR";
 
   const handleCheckout = async () => {
     if (items.length === 0) {
@@ -36,9 +33,6 @@ const ShopifyCart = () => {
       if (checkoutUrl) {
         clearCart();
         setIsOpen(false);
-        
-        // On mobile, redirect in same window to avoid popup blockers
-        // On desktop, open in new tab for better UX
         if (isMobileDevice()) {
           window.location.href = checkoutUrl;
         } else {
@@ -57,38 +51,43 @@ const ShopifyCart = () => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <button 
-          className="relative p-2 hover:text-muted-foreground transition-colors touch-manipulation"
+          className="relative p-2 hover:opacity-60 transition-opacity duration-500 touch-manipulation active:scale-[0.94]"
           aria-label={`Shopping cart with ${itemCount} items`}
         >
-          <ShoppingBag size={20} className="sm:w-[22px] sm:h-[22px]" />
+          <ShoppingBag size={20} strokeWidth={1.5} className="sm:w-[22px] sm:h-[22px]" />
           {itemCount > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 sm:w-5 sm:h-5 bg-foreground text-background text-[10px] sm:text-xs flex items-center justify-center font-body animate-scale-in">
+            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 sm:w-5 sm:h-5 bg-foreground text-background text-[9px] sm:text-[10px] flex items-center justify-center font-body animate-scale-in rounded-full">
               {itemCount}
             </span>
           )}
         </button>
       </SheetTrigger>
-      <SheetContent className="w-full sm:max-w-md flex flex-col h-full safe-bottom">
+      <SheetContent className="w-full sm:max-w-md flex flex-col h-full safe-bottom border-l-0 sm:border-l">
         <SheetHeader className="flex-shrink-0">
-          <SheetTitle className="font-display text-xl sm:text-2xl tracking-tight">
-            YOUR CART
+          <SheetTitle className="font-display text-xl sm:text-2xl font-light tracking-[0.05em]">
+            Your Cart
           </SheetTitle>
         </SheetHeader>
 
         {items.length === 0 ? (
-          <div className="flex-1 flex flex-col items-center justify-center text-center px-4">
-            <ShoppingBag size={40} className="text-muted-foreground mb-4 sm:w-12 sm:h-12" />
-            <p className="font-body text-sm sm:text-base text-muted-foreground">Your cart is empty</p>
+          <div className="flex-1 flex flex-col items-center justify-center text-center px-4 gap-6">
+            <ShoppingBag size={32} strokeWidth={1} className="text-muted-foreground" />
+            <p className="text-body text-muted-foreground">Your cart is empty</p>
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="btn-secondary text-xs"
+            >
+              Continue Shopping
+            </button>
           </div>
         ) : (
           <>
-            <div className="flex-1 overflow-y-auto py-4 sm:py-6 space-y-4 sm:space-y-6 min-h-0 touch-action-pan">
+            <div className="flex-1 overflow-y-auto py-4 sm:py-6 space-y-5 sm:space-y-6 min-h-0 touch-action-pan">
               {items.map((item) => {
                 const image = item.product.node.images.edges[0]?.node;
                 return (
                   <div key={item.variantId} className="flex gap-3 sm:gap-4 animate-fade-in">
-                    {/* Product Image */}
-                    <div className="w-16 h-20 sm:w-20 sm:h-24 flex-shrink-0 border border-border bg-muted overflow-hidden">
+                    <div className="w-16 h-20 sm:w-20 sm:h-24 flex-shrink-0 bg-muted overflow-hidden">
                       {image ? (
                         <img
                           src={image.url}
@@ -103,14 +102,13 @@ const ShopifyCart = () => {
                       )}
                     </div>
 
-                    {/* Product Details */}
                     <div className="flex-1 flex flex-col justify-between min-w-0">
                       <div>
-                        <h4 className="font-display text-sm sm:text-lg truncate">{item.product.node.title}</h4>
-                        <p className="font-body text-[10px] sm:text-xs text-muted-foreground">
-                          {item.selectedOptions.map(opt => opt.value).join(' • ')}
+                        <h4 className="font-display text-sm sm:text-base font-light truncate">{item.product.node.title}</h4>
+                        <p className="text-[10px] sm:text-xs text-muted-foreground tracking-wider mt-0.5">
+                          {item.selectedOptions.map(opt => opt.value).join(' · ')}
                         </p>
-                        <p className="font-body text-xs sm:text-sm mt-0.5">
+                        <p className="text-xs sm:text-sm mt-1 font-light">
                           ₹{Math.round(parseFloat(item.price.amount)).toLocaleString('en-IN')}
                         </p>
                       </div>
@@ -119,29 +117,29 @@ const ShopifyCart = () => {
                         <div className="flex items-center gap-3">
                           <button
                             onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
-                            className="p-1.5 text-muted-foreground hover:text-foreground transition-colors touch-manipulation"
+                            className="p-1.5 text-muted-foreground hover:text-foreground transition-colors duration-500 touch-manipulation active:scale-[0.9]"
                             aria-label="Decrease quantity"
                           >
-                            <Minus size={14} />
+                            <Minus size={13} strokeWidth={1.5} />
                           </button>
-                          <span className="font-body text-sm min-w-[20px] text-center">
+                          <span className="text-xs min-w-[20px] text-center font-light">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-                            className="p-1.5 text-muted-foreground hover:text-foreground transition-colors touch-manipulation"
+                            className="p-1.5 text-muted-foreground hover:text-foreground transition-colors duration-500 touch-manipulation active:scale-[0.9]"
                             aria-label="Increase quantity"
                           >
-                            <Plus size={14} />
+                            <Plus size={13} strokeWidth={1.5} />
                           </button>
                         </div>
 
                         <button
                           onClick={() => removeItem(item.variantId)}
-                          className="p-2 text-muted-foreground hover:text-foreground transition-colors touch-manipulation"
+                          className="p-2 text-muted-foreground hover:text-foreground transition-colors duration-500 touch-manipulation"
                           aria-label="Remove item"
                         >
-                          <X size={16} className="sm:w-[18px] sm:h-[18px]" />
+                          <X size={14} strokeWidth={1.5} />
                         </button>
                       </div>
                     </div>
@@ -151,33 +149,33 @@ const ShopifyCart = () => {
             </div>
 
             {/* Footer */}
-            <div className="flex-shrink-0 border-t border-border pt-4 sm:pt-6 space-y-3 sm:space-y-4 bg-background">
+            <div className="flex-shrink-0 border-t border-border pt-4 sm:pt-6 space-y-4 bg-background">
               <div className="flex justify-between items-center">
-                <span className="font-body text-sm text-muted-foreground">Subtotal</span>
-                <span className="font-display text-xl sm:text-2xl">
+                <span className="text-label tracking-[0.2em] text-muted-foreground">Subtotal</span>
+                <span className="font-display text-xl sm:text-2xl font-light">
                   ₹{Math.round(total).toLocaleString('en-IN')}
                 </span>
               </div>
-              <p className="font-body text-[10px] sm:text-xs text-muted-foreground">
+              <p className="text-[10px] sm:text-xs text-muted-foreground tracking-wider">
                 Shipping calculated at checkout
               </p>
-              <Button
+              <button
                 onClick={handleCheckout}
                 disabled={isLoading || items.length === 0}
-                className="w-full py-5 sm:py-6 font-display text-sm sm:text-lg tracking-wider touch-manipulation active:scale-[0.98] transition-transform"
+                className="w-full btn-primary py-4 sm:py-5 disabled:opacity-40 active:scale-[0.98] transition-transform touch-manipulation"
               >
                 {isLoading ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    PROCESSING...
-                  </>
+                  <span className="flex items-center justify-center gap-2">
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Processing...
+                  </span>
                 ) : (
-                  <>
-                    <ArrowRight className="w-4 h-4 mr-2" />
-                    PROCEED TO CHECKOUT
-                  </>
+                  <span className="flex items-center justify-center gap-2">
+                    <ArrowRight className="w-4 h-4" />
+                    Checkout
+                  </span>
                 )}
-              </Button>
+              </button>
             </div>
           </>
         )}

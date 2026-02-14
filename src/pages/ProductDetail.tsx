@@ -4,7 +4,6 @@ import { ChevronLeft, ChevronRight, ArrowLeft, Plus, Minus, Loader2 } from "luci
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import DiscountBanner from "@/components/DiscountBanner";
 import { storefrontApiRequest, ShopifyProduct, createStorefrontCheckout } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
@@ -80,6 +79,7 @@ const ProductDetail = () => {
   
   const [product, setProduct] = useState<ShopifyProduct["node"] | null>(null);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState<number | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -103,6 +103,7 @@ const ProductDetail = () => {
         console.error("Failed to load product:", err);
       } finally {
         setLoading(false);
+        setTimeout(() => setMounted(true), 100);
       }
     };
 
@@ -116,10 +117,9 @@ const ProductDetail = () => {
   if (loading) {
     return (
       <main className="min-h-screen bg-background text-foreground">
-        <DiscountBanner />
         <Navbar />
         <div className="flex justify-center items-center min-h-[60vh] pt-16">
-          <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+          <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
         </div>
       </main>
     );
@@ -128,9 +128,8 @@ const ProductDetail = () => {
   if (!product) {
     return (
       <main className="min-h-screen bg-background text-foreground">
-        <DiscountBanner />
         <Navbar />
-        <div className="flex flex-col justify-center items-center min-h-[60vh] pt-16 gap-6">
+        <div className="flex flex-col justify-center items-center min-h-[60vh] pt-16 gap-8">
           <p className="text-muted-foreground text-body">Product not found</p>
           <Link to="/shop" className="btn-secondary">
             Back to Shop
@@ -234,31 +233,36 @@ const ProductDetail = () => {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <DiscountBanner />
       <Navbar />
       
-      <section className="pt-32 md:pt-40 pb-20 md:pb-32">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+      <section className="pt-28 sm:pt-32 md:pt-40 pb-16 sm:pb-20 md:pb-32">
+        <div className="container mx-auto px-5 sm:px-8 lg:px-16">
           {/* Back Link */}
           <Link 
             to="/shop" 
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 md:mb-12 text-micro font-medium"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-500 mb-6 sm:mb-8 md:mb-12 text-label tracking-[0.2em]"
           >
-            <ArrowLeft size={14} />
-            Back to Shop
+            <ArrowLeft size={14} strokeWidth={1.5} />
+            Back
           </Link>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
+          <div 
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-20 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{
+              opacity: mounted ? 1 : 0,
+              transform: mounted ? 'translateY(0)' : 'translateY(25px)',
+            }}
+          >
             {/* Left: Image Gallery */}
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {/* Main Image */}
-              <div className="relative aspect-[3/4] bg-muted overflow-hidden">
+              <div className="relative aspect-[3/4] bg-muted overflow-hidden group">
                 {images[selectedImageIndex] && (
                   <img
                     src={images[selectedImageIndex].node.url}
                     alt={images[selectedImageIndex].node.altText || product.title}
                     onLoad={() => setImageLoaded(true)}
-                    className={`w-full h-full object-cover transition-all duration-500 ${
+                    className={`w-full h-full object-cover transition-all duration-700 ease-out ${
                       imageLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-md'
                     }`}
                   />
@@ -269,31 +273,47 @@ const ProductDetail = () => {
                   <>
                     <button
                       onClick={handlePrevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-foreground/40 hover:text-foreground transition-colors duration-300"
+                      className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 p-2 text-foreground/30 hover:text-foreground transition-all duration-500 opacity-0 group-hover:opacity-100"
                       aria-label="Previous image"
                     >
-                      <ChevronLeft size={28} strokeWidth={1.5} />
+                      <ChevronLeft size={24} strokeWidth={1.5} />
                     </button>
                     <button
                       onClick={handleNextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-foreground/40 hover:text-foreground transition-colors duration-300"
+                      className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-2 text-foreground/30 hover:text-foreground transition-all duration-500 opacity-0 group-hover:opacity-100"
                       aria-label="Next image"
                     >
-                      <ChevronRight size={28} strokeWidth={1.5} />
+                      <ChevronRight size={24} strokeWidth={1.5} />
                     </button>
                   </>
                 )}
+
+                {/* Mobile swipe dots */}
+                {images.length > 1 && (
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 lg:hidden">
+                    {images.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedImageIndex(index)}
+                        className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
+                          selectedImageIndex === index ? "bg-foreground w-4" : "bg-foreground/30"
+                        }`}
+                        aria-label={`Image ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
 
-              {/* Thumbnail Strip */}
+              {/* Thumbnail Strip — desktop only */}
               {images.length > 1 && (
-                <div className="flex gap-3 overflow-x-auto pb-2">
+                <div className="hidden lg:flex gap-3 overflow-x-auto pb-2">
                   {images.map((img, index) => (
                     <button
                       key={index}
                       onClick={() => setSelectedImageIndex(index)}
-                      className={`flex-shrink-0 w-16 h-20 md:w-20 md:h-24 overflow-hidden transition-opacity duration-300 ${
-                        selectedImageIndex === index ? "opacity-100" : "opacity-30 hover:opacity-60"
+                      className={`flex-shrink-0 w-16 h-20 md:w-20 md:h-24 overflow-hidden transition-all duration-500 ${
+                        selectedImageIndex === index ? "opacity-100 ring-1 ring-accent" : "opacity-30 hover:opacity-60"
                       }`}
                     >
                       <img
@@ -305,18 +325,13 @@ const ProductDetail = () => {
                   ))}
                 </div>
               )}
-
-              {/* Image Counter */}
-              <p className="text-micro text-muted-foreground">
-                {selectedImageIndex + 1} / {images.length}
-              </p>
             </div>
 
             {/* Right: Product Info */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {/* Title & Price */}
               <div className="space-y-4">
-                <h1 className="font-display text-section text-foreground">
+                <h1 className="font-display text-section text-foreground font-light">
                   {product.title}
                 </h1>
                 <div className="flex items-baseline gap-3">
@@ -325,7 +340,7 @@ const ProductDetail = () => {
                       ₹{Math.round(compareAtPrice).toLocaleString('en-IN')}
                     </span>
                   )}
-                  <span className="text-2xl md:text-3xl font-display text-foreground">
+                  <span className="text-2xl md:text-3xl font-display text-foreground font-light">
                     ₹{Math.round(price).toLocaleString('en-IN')}
                   </span>
                 </div>
@@ -334,8 +349,8 @@ const ProductDetail = () => {
               {/* Size Selection */}
               {sizes.length > 0 && (
                 <div className="space-y-4">
-                  <p className="text-label text-muted-foreground">Size</p>
-                  <div className="flex flex-wrap gap-3">
+                  <p className="text-label text-muted-foreground tracking-[0.2em]">Size</p>
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
                     {sizes.map((size) => {
                       const variantForSize = variants.find(v => 
                         v.node.selectedOptions.some(opt => opt.value === size)
@@ -348,12 +363,12 @@ const ProductDetail = () => {
                           key={size}
                           onClick={() => isAvailable && handleSizeSelect(size)}
                           disabled={!isAvailable}
-                          className={`px-5 py-3 text-sm font-medium rounded-lg transition-all duration-300 ${
+                          className={`px-4 sm:px-5 py-2.5 sm:py-3 text-xs tracking-[0.1em] uppercase transition-all duration-500 touch-manipulation active:scale-[0.96] ${
                             isSelected
-                              ? "bg-foreground text-background shadow-button"
+                              ? "bg-foreground text-background"
                               : isAvailable
-                                ? "bg-muted text-foreground hover:bg-muted/70"
-                                : "bg-muted/50 text-muted-foreground/40 cursor-not-allowed line-through"
+                                ? "bg-transparent border border-foreground/15 text-foreground hover:border-foreground/40"
+                                : "bg-transparent border border-foreground/8 text-muted-foreground/40 cursor-not-allowed line-through"
                           }`}
                         >
                           {size}
@@ -365,35 +380,35 @@ const ProductDetail = () => {
               )}
 
               {/* Quantity */}
-              <div className="flex items-center gap-8">
-                <p className="text-label text-muted-foreground">Quantity</p>
+              <div className="flex items-center gap-6 sm:gap-8">
+                <p className="text-label text-muted-foreground tracking-[0.2em]">Quantity</p>
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                    className="p-2.5 rounded-lg bg-muted text-foreground hover:bg-muted/70 transition-colors duration-300"
+                    className="p-2 border border-foreground/15 text-foreground hover:border-foreground/40 transition-all duration-500 touch-manipulation active:scale-[0.94]"
                   >
-                    <Minus size={16} />
+                    <Minus size={14} strokeWidth={1.5} />
                   </button>
-                  <span className="text-body font-medium min-w-[32px] text-center">{quantity}</span>
+                  <span className="text-body font-normal min-w-[32px] text-center">{quantity}</span>
                   <button
                     onClick={() => setQuantity(q => q + 1)}
-                    className="p-2.5 rounded-lg bg-muted text-foreground hover:bg-muted/70 transition-colors duration-300"
+                    className="p-2 border border-foreground/15 text-foreground hover:border-foreground/40 transition-all duration-500 touch-manipulation active:scale-[0.94]"
                   >
-                    <Plus size={16} />
+                    <Plus size={14} strokeWidth={1.5} />
                   </button>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 pt-2 sm:pt-4">
                 <button
                   onClick={handleAddToCart}
                   disabled={!selectedVariant || isAddingToCart}
-                  className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="flex-1 btn-primary disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.97] transition-transform"
                 >
                   {isAddingToCart ? (
                     <span className="flex items-center justify-center gap-2">
-                      <Loader2 size={16} className="animate-spin" />
+                      <Loader2 size={14} className="animate-spin" />
                       Adding...
                     </span>
                   ) : (
@@ -404,11 +419,11 @@ const ProductDetail = () => {
                 <button
                   onClick={handleBuyNow}
                   disabled={!selectedVariant || isBuyingNow}
-                  className="flex-1 btn-secondary disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 btn-secondary disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.97] transition-transform"
                 >
                   {isBuyingNow ? (
                     <span className="flex items-center justify-center gap-2">
-                      <Loader2 size={16} className="animate-spin" />
+                      <Loader2 size={14} className="animate-spin" />
                       Processing...
                     </span>
                   ) : (
@@ -420,34 +435,34 @@ const ProductDetail = () => {
               {/* Stock Status */}
               {selectedVariant && (
                 <div className="flex items-center gap-2">
-                  <span className={`w-2 h-2 rounded-full ${selectedVariant.availableForSale ? "bg-green-500" : "bg-red-400"}`} />
-                  <span className="text-micro text-muted-foreground">
+                  <span className={`w-1.5 h-1.5 rounded-full ${selectedVariant.availableForSale ? "bg-green-600" : "bg-red-400"}`} />
+                  <span className="text-label text-muted-foreground tracking-[0.15em]">
                     {selectedVariant.availableForSale ? "In Stock" : "Out of Stock"}
                   </span>
                 </div>
               )}
 
               {/* Collapsible Sections */}
-              <div className="pt-6 space-y-0 border-t border-border/50">
+              <div className="pt-4 sm:pt-6 space-y-0 border-t border-border/50">
                 <Collapsible open={productDetailsOpen} onOpenChange={setProductDetailsOpen}>
-                  <CollapsibleTrigger className="flex items-center justify-between w-full py-5 text-label text-foreground hover:text-muted-foreground transition-colors duration-300">
+                  <CollapsibleTrigger className="flex items-center justify-between w-full py-4 sm:py-5 text-label tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors duration-500">
                     <span>Product Details</span>
-                    <Plus size={14} className={`transition-transform duration-300 ${productDetailsOpen ? "rotate-45" : ""}`} />
+                    <Plus size={12} strokeWidth={1.5} className={`transition-transform duration-500 ${productDetailsOpen ? "rotate-45" : ""}`} />
                   </CollapsibleTrigger>
-                  <CollapsibleContent className="pb-5">
-                    <p className="text-body-sm text-muted-foreground leading-relaxed">
+                  <CollapsibleContent className="pb-4 sm:pb-5">
+                    <p className="text-body text-muted-foreground leading-relaxed">
                       {product.description || "Premium quality crafted with attention to detail."}
                     </p>
                   </CollapsibleContent>
                 </Collapsible>
 
                 <Collapsible open={shippingOpen} onOpenChange={setShippingOpen}>
-                  <CollapsibleTrigger className="flex items-center justify-between w-full py-5 border-t border-border/50 text-label text-foreground hover:text-muted-foreground transition-colors duration-300">
+                  <CollapsibleTrigger className="flex items-center justify-between w-full py-4 sm:py-5 border-t border-border/50 text-label tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors duration-500">
                     <span>Shipping & Returns</span>
-                    <Plus size={14} className={`transition-transform duration-300 ${shippingOpen ? "rotate-45" : ""}`} />
+                    <Plus size={12} strokeWidth={1.5} className={`transition-transform duration-500 ${shippingOpen ? "rotate-45" : ""}`} />
                   </CollapsibleTrigger>
-                  <CollapsibleContent className="pb-5">
-                    <div className="text-body-sm text-muted-foreground leading-relaxed space-y-2">
+                  <CollapsibleContent className="pb-4 sm:pb-5">
+                    <div className="text-body text-muted-foreground leading-relaxed space-y-2">
                       <p>Free shipping on orders over ₹999</p>
                       <p>Standard delivery: 5-7 business days</p>
                       <p>Easy returns within 7 days</p>
