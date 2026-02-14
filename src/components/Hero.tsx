@@ -3,10 +3,6 @@ import onigiriLogo from "@/assets/onigiri-logo.png";
 
 const Hero = () => {
   const navigate = useNavigate();
-  
-  const goToShop = () => {
-    navigate('/shop');
-  };
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center pt-24 pb-20 overflow-hidden bg-background">
@@ -41,10 +37,10 @@ const Hero = () => {
           {/* CTA */}
           <div className="pt-2 animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <button 
-              onClick={goToShop} 
+              onClick={() => navigate('/shop')} 
               className="btn-primary"
             >
-              Explore the Collection
+              Shop
             </button>
           </div>
         </div>
