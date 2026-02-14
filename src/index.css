@@ -260,7 +260,8 @@
   }
 
   .section-divider {
-    @apply w-full h-px bg-foreground/6;
+    @apply w-full h-px;
+    background-color: hsl(var(--foreground) / 0.06);
   }
 
   /* Gold accent line */
