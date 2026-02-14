@@ -84,13 +84,13 @@ const Shop = () => {
                     className="group opacity-0 animate-fade-in"
                     style={{ animationDelay: `${0.1 + index * 0.05}s`, animationFillMode: 'forwards' }}
                   >
-                    <div className="aspect-[3/4] relative overflow-hidden mb-5 bg-muted">
+                    <div className="aspect-[3/4] relative overflow-hidden mb-5 bg-muted transition-shadow duration-700 ease-out group-hover:shadow-lg">
                       {image && (
                         <img
                           src={image.url}
                           alt={image.altText || product.node.title}
                           onLoad={() => handleImageLoad(productId)}
-                          className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${
+                          className={`w-full h-full object-cover transition-all duration-1000 ease-out group-hover:scale-[1.03] ${
                             isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-md'
                           }`}
                           loading="lazy"

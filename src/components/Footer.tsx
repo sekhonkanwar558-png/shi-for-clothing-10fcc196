@@ -1,15 +1,25 @@
 import onigiriLogo from "@/assets/onigiri-logo.png";
 import { Link } from "react-router-dom";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const Footer = () => {
+  const { ref, isVisible } = useScrollReveal();
+
   return (
     <footer className="py-20 sm:py-28 border-t border-border bg-background safe-bottom">
       <div className="container mx-auto px-6 sm:px-8 lg:px-16">
-        <div className="max-w-5xl mx-auto text-center space-y-12">
+        <div
+          ref={ref}
+          className="max-w-5xl mx-auto text-center space-y-12 transition-all duration-[1400ms] ease-out"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+          }}
+        >
           {/* Logo */}
           <Link 
             to="/"
-            className="inline-flex flex-col items-center gap-5 hover:opacity-60 transition-opacity duration-500 touch-manipulation"
+            className="inline-flex flex-col items-center gap-5 hover:opacity-60 transition-opacity duration-700 touch-manipulation"
           >
             <img 
               src={onigiriLogo} 
