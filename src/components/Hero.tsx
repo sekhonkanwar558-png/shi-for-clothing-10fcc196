@@ -9,39 +9,37 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center pt-32 md:pt-36 pb-20 overflow-hidden bg-background">
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-20">
-        <div className="max-w-3xl mx-auto text-center space-y-10 md:space-y-14">
-          {/* Onigiri Logo — symbolic, centered */}
-          <div className="opacity-0 animate-fade-in animation-delay-100">
+    <section className="relative min-h-screen flex flex-col justify-center items-center pt-24 pb-20 overflow-hidden bg-background">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-16 relative z-20">
+        <div className="max-w-3xl mx-auto text-center space-y-12 md:space-y-16">
+          {/* Onigiri Logo */}
+          <div className="animate-fade-in">
             <img 
               src={onigiriLogo} 
               alt="shi-for" 
-              className="h-24 md:h-36 w-auto mx-auto"
+              className="h-28 md:h-40 w-auto mx-auto"
             />
           </div>
           
           {/* Statement headline */}
-          <div className="space-y-4 opacity-0 animate-fade-in animation-delay-300">
-            <h1 className="font-display text-hero text-foreground font-light">
-              Purity. Precision.
-              <br />
-              <em className="italic">Presence.</em>
-            </h1>
-          </div>
+          <h1 className="font-display text-hero text-foreground font-light animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            Purity. Precision.
+            <br />
+            <em className="italic">Presence.</em>
+          </h1>
 
           {/* Subtext */}
-          <p className="text-label text-muted-foreground opacity-0 animate-fade-in animation-delay-500">
+          <p className="text-label text-muted-foreground tracking-[0.3em] animate-fade-in" style={{ animationDelay: '0.4s' }}>
             White, perfected.
           </p>
 
           {/* Gold accent line */}
-          <div className="opacity-0 animate-fade-in animation-delay-600 flex justify-center">
-            <div className="accent-line" />
+          <div className="flex justify-center animate-fade-in" style={{ animationDelay: '0.5s' }}>
+            <div className="w-16 h-px bg-accent" />
           </div>
 
           {/* CTA */}
-          <div className="opacity-0 animate-fade-in animation-delay-800 pt-4">
+          <div className="pt-2 animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <button 
               onClick={goToShop} 
               className="btn-primary"

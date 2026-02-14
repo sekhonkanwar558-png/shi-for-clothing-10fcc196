@@ -3,35 +3,35 @@ import onigiriLogo from "@/assets/onigiri-logo.png";
 const AboutSection = () => {
   return (
     <section id="about" className="section-padding bg-background">
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-16">
         <div className="max-w-5xl mx-auto">
           {/* Section label */}
-          <div className="text-center mb-16 md:mb-24">
-            <p className="text-label text-muted-foreground mb-6">
+          <div className="text-center mb-20 md:mb-28">
+            <p className="text-label text-muted-foreground tracking-[0.3em] mb-8">
               The Philosophy
             </p>
-            <div className="accent-line mx-auto" />
+            <div className="w-12 h-px bg-accent mx-auto" />
           </div>
           
           <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-start">
-            {/* Left Column — Brand mark & name */}
-            <div className="flex flex-col items-center md:items-start space-y-8">
+            {/* Left Column */}
+            <div className="flex flex-col items-center md:items-start space-y-10">
               <img 
                 src={onigiriLogo} 
                 alt="shi-for" 
-                className="h-20 sm:h-28 w-auto"
+                className="h-24 sm:h-32 w-auto"
               />
-              <h2 className="font-display text-section text-foreground font-light italic">
+              <h2 className="font-display text-section text-foreground font-light italic tracking-[0.03em]">
                 shi-for
               </h2>
-              <div className="accent-line" />
-              <p className="text-label text-accent">
+              <div className="w-12 h-px bg-accent" />
+              <p className="text-label text-accent tracking-[0.3em]">
                 Simplicity · Discipline · Craft · Intention
               </p>
             </div>
             
-            {/* Right Column — Narrative */}
-            <div className="space-y-8 text-body text-muted-foreground">
+            {/* Right Column */}
+            <div className="space-y-8 text-body text-muted-foreground leading-[1.9]">
               <p>
                 Born from a reverence for Japanese craftsmanship and the philosophy of wabi-sabi — finding beauty in simplicity — shi-for exists to perfect one essential garment.
               </p>
@@ -41,7 +41,7 @@ const AboutSection = () => {
               <p>
                 Our white t-shirt is not merely clothing. It is a canvas of intention. A garment forged in stoicism, inspired by the discipline of Japanese culture, and created to evolve humanity in peace.
               </p>
-              <p className="font-display text-foreground text-xl md:text-2xl pt-4 leading-relaxed italic font-light">
+              <p className="font-display text-foreground text-xl md:text-2xl pt-6 leading-[1.5] italic font-light tracking-[0.02em]">
                 "From inspiration into reality — authored with purpose, worn with meaning."
               </p>
             </div>
