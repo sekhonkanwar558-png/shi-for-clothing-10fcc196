@@ -3,49 +3,43 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="py-16 sm:py-24 border-t border-border bg-background safe-bottom">
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="max-w-5xl mx-auto text-center space-y-10">
+    <footer className="py-20 sm:py-28 border-t border-border bg-background safe-bottom">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-16">
+        <div className="max-w-5xl mx-auto text-center space-y-12">
           {/* Logo */}
           <Link 
             to="/"
-            className="inline-flex flex-col items-center gap-4 hover:opacity-60 transition-opacity duration-500 touch-manipulation"
+            className="inline-flex flex-col items-center gap-5 hover:opacity-60 transition-opacity duration-500 touch-manipulation"
           >
             <img 
               src={onigiriLogo} 
               alt="shi-for" 
-              className="h-12 sm:h-14 w-auto" 
+              className="h-14 sm:h-16 w-auto" 
             />
-            <span className="font-display text-xl tracking-wide text-foreground font-light">
+            <span className="font-display text-2xl tracking-[0.05em] text-foreground font-light">
               shi-for
             </span>
           </Link>
 
           {/* Philosophy line */}
-          <p className="font-display text-base sm:text-lg text-muted-foreground font-light italic max-w-md mx-auto">
+          <p className="font-display text-lg sm:text-xl text-muted-foreground font-light italic max-w-md mx-auto tracking-[0.02em]">
             "Wear the calm."
           </p>
           
-          <div className="accent-line mx-auto" />
+          <div className="w-12 h-px bg-accent mx-auto" />
           
           {/* Links */}
-          <div className="flex justify-center gap-10">
-            <Link 
-              to="/shop"
-              className="nav-link text-label"
-            >
+          <div className="flex justify-center gap-12">
+            <Link to="/shop" className="nav-link text-label tracking-[0.3em]">
               Shop
             </Link>
-            <a 
-              href="#about"
-              className="nav-link text-label"
-            >
+            <a href="#about" className="nav-link text-label tracking-[0.3em]">
               Philosophy
             </a>
           </div>
           
           {/* Copyright */}
-          <p className="text-micro text-muted-foreground pt-6">
+          <p className="text-micro text-muted-foreground pt-8 tracking-[0.05em]">
             © {new Date().getFullYear()} shi-for. All rights reserved.
           </p>
         </div>
