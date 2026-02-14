@@ -4,7 +4,6 @@ import { Loader2, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import DiscountBanner from "@/components/DiscountBanner";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 
 const Shop = () => {
@@ -36,30 +35,29 @@ const Shop = () => {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <DiscountBanner />
       <Navbar />
       
-      <section className="pt-36 md:pt-44 pb-20 md:pb-32">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+      <section className="pt-32 md:pt-40 pb-20 md:pb-32">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-16">
           {/* Header */}
-          <div className="max-w-4xl mb-12 md:mb-16">
+          <div className="max-w-4xl mb-16 md:mb-20">
             <Link 
               to="/" 
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 text-micro font-medium"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-10 text-label tracking-[0.2em]"
             >
-              <ArrowLeft size={14} />
-              Back to Home
+              <ArrowLeft size={14} strokeWidth={1.5} />
+              Back
             </Link>
             
-            <h1 className="font-display text-section text-foreground">
-              The Collection
+            <h1 className="font-display text-section text-foreground font-light italic tracking-[0.02em]">
+              Shop
             </h1>
           </div>
 
           {/* Products Grid */}
           {loading ? (
             <div className="flex justify-center items-center py-24">
-              <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+              <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
             </div>
           ) : error ? (
             <div className="text-center py-24">
@@ -72,7 +70,7 @@ const Shop = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12 md:gap-x-8 md:gap-y-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-14 md:gap-x-10 md:gap-y-20">
               {products.map((product, index) => {
                 const image = product.node.images.edges[0]?.node;
                 const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
@@ -86,7 +84,6 @@ const Shop = () => {
                     className="group opacity-0 animate-fade-in"
                     style={{ animationDelay: `${0.1 + index * 0.05}s`, animationFillMode: 'forwards' }}
                   >
-                    {/* Product Image with progressive loading */}
                     <div className="aspect-[3/4] relative overflow-hidden mb-5 bg-muted">
                       {image && (
                         <img
@@ -106,12 +103,11 @@ const Shop = () => {
                       )}
                     </div>
 
-                    {/* Product Info - left aligned */}
-                    <div className="space-y-1.5">
-                      <h3 className="text-body font-medium text-foreground group-hover:text-muted-foreground transition-colors duration-300">
+                    <div className="space-y-2">
+                      <h3 className="text-body font-normal text-foreground group-hover:text-muted-foreground transition-colors duration-500">
                         {product.node.title}
                       </h3>
-                      <p className="text-body-sm text-muted-foreground">
+                      <p className="text-micro text-muted-foreground">
                         ₹{Math.round(price).toLocaleString('en-IN')}
                       </p>
                     </div>
