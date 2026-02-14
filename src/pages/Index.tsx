@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
+import CraftsmanshipSection from "@/components/CraftsmanshipSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -12,7 +13,11 @@ const Index = () => {
       <DiscountBanner />
       <Navbar />
       <Hero />
+      <div className="section-divider" />
       <AboutSection />
+      <div className="section-divider" />
+      <CraftsmanshipSection />
+      <div className="section-divider" />
       <NewsletterSection />
       <Footer />
       <WhatsAppButton />
