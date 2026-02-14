@@ -14,18 +14,18 @@ export default {
   	},
   	extend: {
   		fontFamily: {
-  			display: ['Instrument Serif', 'Georgia', 'serif'],
+  			display: ['Cormorant Garamond', 'Georgia', 'serif'],
   			body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
   			sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
   		},
   		fontSize: {
-  			'hero': ['clamp(2.75rem, 6vw + 1rem, 5.5rem)', { lineHeight: '1.08', letterSpacing: '-0.02em' }],
-  			'section': ['clamp(1.75rem, 3vw + 0.5rem, 2.75rem)', { lineHeight: '1.15', letterSpacing: '-0.01em' }],
-  			'body-lg': ['clamp(0.9375rem, 0.3vw + 0.875rem, 1.0625rem)', { lineHeight: '1.75' }],
-  			'body': ['1rem', { lineHeight: '1.7' }],
-  			'body-sm': ['0.9375rem', { lineHeight: '1.65' }],
-  			'micro': ['0.8125rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
-  			'label': ['0.6875rem', { lineHeight: '1.4', letterSpacing: '0.12em' }]
+  			'hero': ['clamp(3rem, 7vw + 1rem, 7rem)', { lineHeight: '1.0', letterSpacing: '0.02em' }],
+  			'section': ['clamp(2rem, 4vw + 0.5rem, 3.5rem)', { lineHeight: '1.1', letterSpacing: '0.01em' }],
+  			'body-lg': ['clamp(0.875rem, 0.2vw + 0.85rem, 0.9375rem)', { lineHeight: '1.8' }],
+  			'body': ['0.875rem', { lineHeight: '1.8' }],
+  			'body-sm': ['0.8125rem', { lineHeight: '1.7' }],
+  			'micro': ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.02em' }],
+  			'label': ['0.625rem', { lineHeight: '1.4', letterSpacing: '0.25em' }]
   		},
   		colors: {
   			border: 'hsl(var(--border))',
@@ -81,11 +81,11 @@ export default {
   				'100%': { opacity: '1', transform: 'translateY(0)' }
   			},
   			'fade-in-up': {
-  				'0%': { opacity: '0', transform: 'translateY(30px)' },
+  				'0%': { opacity: '0', transform: 'translateY(40px)' },
   				'100%': { opacity: '1', transform: 'translateY(0)' }
   			},
   			'scale-in': {
-  				'0%': { opacity: '0', transform: 'scale(0.95)' },
+  				'0%': { opacity: '0', transform: 'scale(0.97)' },
   				'100%': { opacity: '1', transform: 'scale(1)' }
   			},
   			'slide-in-right': {
@@ -96,9 +96,9 @@ export default {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
-  			'fade-in': 'fade-in 0.6s ease-out forwards',
-  			'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
-  			'scale-in': 'scale-in 0.4s ease-out forwards',
+  			'fade-in': 'fade-in 0.8s ease-out forwards',
+  			'fade-in-up': 'fade-in-up 1s ease-out forwards',
+  			'scale-in': 'scale-in 0.6s ease-out forwards',
   			'slide-in-right': 'slide-in-right 0.3s ease-out',
   		},
   		boxShadow: {

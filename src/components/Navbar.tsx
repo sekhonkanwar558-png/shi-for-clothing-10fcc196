@@ -38,31 +38,37 @@ const Navbar = () => {
 
   return (
     <nav 
-      className={`fixed top-8 left-0 right-0 z-40 transition-all duration-500 safe-top ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 safe-top ${
         isScrolled 
-          ? 'bg-background/95 backdrop-blur-md border-b border-foreground/5' 
+          ? 'bg-background/98 backdrop-blur-sm border-b border-foreground/5' 
           : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-4 sm:py-5 flex items-center justify-between">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-5 sm:py-6 flex items-center justify-between">
         <Link
           to="/"
-          className="flex items-center gap-2.5 hover:opacity-70 transition-opacity duration-300 touch-manipulation"
+          className="flex items-center gap-3 hover:opacity-60 transition-opacity duration-500 touch-manipulation"
         >
-          <img src={onigiriLogo} alt="shi-for onigiri logo" className="h-8 sm:h-9 w-auto" />
-          <span className="font-display text-xl sm:text-2xl text-foreground">
+          <img src={onigiriLogo} alt="shi-for" className="h-7 sm:h-8 w-auto" />
+          <span className="font-display text-lg sm:text-xl text-foreground font-light tracking-wide">
             shi-for
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-12">
           <Link
             to="/shop"
             className="nav-link text-label"
           >
-            SHOP
+            Shop
           </Link>
+          <a
+            href="#about"
+            className="nav-link text-label"
+          >
+            Philosophy
+          </a>
           <ShopifyCart />
         </div>
 
@@ -70,33 +76,37 @@ const Navbar = () => {
         <div className="flex items-center gap-3 md:hidden">
           <ShopifyCart />
           <button
-            className="p-2 text-foreground hover:opacity-60 transition-opacity duration-300 touch-manipulation"
+            className="p-2 text-foreground hover:opacity-60 transition-opacity duration-500 touch-manipulation"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
             aria-expanded={isOpen}
           >
-            {isOpen ? <X size={22} /> : <Menu size={22} />}
+            {isOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
           </button>
         </div>
       </div>
 
-      {/* Sequoia-style thin line under nav */}
-      <div className={`w-full h-px transition-colors duration-500 ${isScrolled ? 'bg-foreground/8' : 'bg-transparent'}`} />
-
       {/* Mobile Navigation Overlay */}
       <div 
-        className={`md:hidden fixed inset-0 top-[73px] bg-background z-40 transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 top-[69px] bg-background z-40 transition-all duration-500 ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
-        <div className="container mx-auto px-6 py-16 flex flex-col items-start gap-8">
+        <div className="container mx-auto px-6 py-20 flex flex-col items-center gap-10">
           <Link
             to="/shop"
-            className="font-display text-3xl text-foreground hover:opacity-60 transition-opacity duration-300 touch-manipulation"
+            className="font-display text-2xl text-foreground hover:text-accent transition-colors duration-500 touch-manipulation font-light tracking-wide"
             onClick={() => setIsOpen(false)}
           >
             Shop
           </Link>
+          <a
+            href="#about"
+            className="font-display text-2xl text-foreground hover:text-accent transition-colors duration-500 touch-manipulation font-light tracking-wide"
+            onClick={() => setIsOpen(false)}
+          >
+            Philosophy
+          </a>
         </div>
       </div>
     </nav>

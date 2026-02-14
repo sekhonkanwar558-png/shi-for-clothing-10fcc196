@@ -4,38 +4,45 @@ const AboutSection = () => {
   return (
     <section id="about" className="section-padding bg-background">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="max-w-4xl">
-          {/* Left-aligned label */}
-          <p className="text-label text-muted-foreground mb-8">
-            About Us
-          </p>
+        <div className="max-w-5xl mx-auto">
+          {/* Section label */}
+          <div className="text-center mb-16 md:mb-24">
+            <p className="text-label text-muted-foreground mb-6">
+              The Philosophy
+            </p>
+            <div className="accent-line mx-auto" />
+          </div>
           
-          <div className="grid md:grid-cols-[1fr,2fr] gap-12 md:gap-16 items-start">
-            {/* Logo Column */}
-            <div className="flex flex-col items-start space-y-6">
+          <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-start">
+            {/* Left Column — Brand mark & name */}
+            <div className="flex flex-col items-center md:items-start space-y-8">
               <img 
                 src={onigiriLogo} 
-                alt="shi-for onigiri logo" 
-                className="h-24 sm:h-32 w-auto"
+                alt="shi-for" 
+                className="h-20 sm:h-28 w-auto"
               />
-              <h2 className="font-display text-section text-foreground">
+              <h2 className="font-display text-section text-foreground font-light italic">
                 shi-for
               </h2>
+              <div className="accent-line" />
+              <p className="text-label text-accent">
+                Simplicity · Discipline · Craft · Intention
+              </p>
             </div>
             
-            {/* Content Column */}
-            <div className="space-y-6 text-body text-muted-foreground font-light">
+            {/* Right Column — Narrative */}
+            <div className="space-y-8 text-body text-muted-foreground">
               <p>
-                shi-for is a premium minimal clothing brand inspired by the raw beauty of mountains and everyday simplicity. We started with one goal — to create clean, high-quality plain white T-shirts that feel as good as they look.
+                Born from a reverence for Japanese craftsmanship and the philosophy of wabi-sabi — finding beauty in simplicity — shi-for exists to perfect one essential garment.
               </p>
               <p>
-                Our designs focus on minimal aesthetics, durable fabric, and a timeless fit that anyone can wear, anywhere. The mountain logo on our collar represents our core values: strength, freedom, and authenticity.
+                We believe in the power of restraint. Every stitch, every thread, every detail is considered with the same precision that defines the finest Japanese artisans.
               </p>
               <p>
-                At shi-for, we believe style doesn't need to be loud — it needs to be real, effortless, and built to last. This is only the beginning, and we're here to redefine basics with quality that speaks for itself.
+                Our white t-shirt is not merely clothing. It is a canvas of intention. A garment forged in stoicism, inspired by the discipline of Japanese culture, and created to evolve humanity in peace.
               </p>
-              <p className="font-display text-foreground text-xl md:text-2xl pt-4 leading-relaxed">
-                Welcome to shi-for. Wear the calm.
+              <p className="font-display text-foreground text-xl md:text-2xl pt-4 leading-relaxed italic font-light">
+                "From inspiration into reality — authored with purpose, worn with meaning."
               </p>
             </div>
           </div>
