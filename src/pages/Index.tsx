@@ -21,6 +21,7 @@ const Index = () => {
       <div className="section-divider" />
       <NewsletterSection />
       <Footer />
+      <InstagramButton />
       <WhatsAppButton />
     </main>
   );
