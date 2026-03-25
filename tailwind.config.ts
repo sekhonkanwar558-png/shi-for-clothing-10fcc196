@@ -105,8 +105,10 @@ export default {
   			sm: 'var(--shadow-sm)',
   			md: 'var(--shadow-md)',
   			lg: 'var(--shadow-lg)',
+  			xl: 'var(--shadow-xl)',
   			'button': 'var(--shadow-button)',
-  			'button-hover': 'var(--shadow-button-hover)'
+  			'button-hover': 'var(--shadow-button-hover)',
+  			'glow': 'var(--shadow-glow)',
   		}
   	}
   },
