@@ -13,8 +13,10 @@ const Index = () => {
     <main className="min-h-screen bg-background text-foreground">
       <Navbar />
       <Hero />
+      <div className="section-divider" />
       <AboutSection />
       <BrandMarquee />
+      <div className="section-divider" />
       <CraftsmanshipSection />
       <div className="section-divider" />
       <NewsletterSection />

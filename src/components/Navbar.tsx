@@ -41,9 +41,9 @@ const Navbar = () => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isScrolled 
-          ? 'bg-background/95 backdrop-blur-lg border-b border-foreground/[0.04]' 
+          ? 'bg-background/98 backdrop-blur-sm border-b border-foreground/5' 
           : 'bg-transparent border-b border-transparent'
       }`}
       style={{
@@ -109,8 +109,8 @@ const Navbar = () => {
           >
             Philosophy
           </a>
-          <div className="accent-line" />
-          <p className="text-label text-muted-foreground tracking-[0.35em]">
+          <div className="w-8 h-px bg-accent" />
+          <p className="text-label text-muted-foreground tracking-[0.3em]">
             Wear the calm.
           </p>
         </div>

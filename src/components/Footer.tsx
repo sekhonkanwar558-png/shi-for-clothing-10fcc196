@@ -4,8 +4,8 @@ import { Reveal } from "@/hooks/useScrollReveal";
 
 const Footer = () => {
   return (
-    <footer className="py-16 sm:py-20 md:py-28 border-t border-border bg-background safe-bottom relative grain-overlay">
-      <div className="container mx-auto px-5 sm:px-8 lg:px-16 relative z-10">
+    <footer className="py-16 sm:py-20 md:py-28 border-t border-border bg-background safe-bottom">
+      <div className="container mx-auto px-5 sm:px-8 lg:px-16">
         <Reveal>
           <div className="max-w-5xl mx-auto text-center space-y-10 sm:space-y-12">
             {/* Logo */}
@@ -28,7 +28,7 @@ const Footer = () => {
               "Wear the calm."
             </p>
             
-            <div className="accent-line mx-auto" />
+            <div className="w-12 h-px bg-accent mx-auto" />
             
             {/* Links */}
             <div className="flex justify-center gap-10 sm:gap-12">
@@ -39,30 +39,9 @@ const Footer = () => {
                 Philosophy
               </a>
             </div>
-
-            {/* Social */}
-            <div className="flex justify-center gap-8">
-              <a 
-                href="https://www.instagram.com/shiforyo" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-label text-muted-foreground hover:text-accent tracking-[0.2em] transition-colors duration-700"
-              >
-                Instagram
-              </a>
-              <span className="text-muted-foreground/30">·</span>
-              <a 
-                href="https://wa.me/916284619607" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-label text-muted-foreground hover:text-accent tracking-[0.2em] transition-colors duration-700"
-              >
-                WhatsApp
-              </a>
-            </div>
             
             {/* Copyright */}
-            <p className="text-micro text-muted-foreground/60 pt-6 sm:pt-8 tracking-[0.05em]">
+            <p className="text-micro text-muted-foreground pt-6 sm:pt-8 tracking-[0.05em]">
               © {new Date().getFullYear()} shi-for. All rights reserved.
             </p>
           </div>
