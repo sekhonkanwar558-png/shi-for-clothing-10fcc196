@@ -12,20 +12,14 @@ const NewsletterSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     const result = emailSchema.safeParse(email.trim());
     if (!result.success) {
       toast.error(result.error.errors[0].message);
       return;
     }
-
     setIsLoading(true);
-    
     try {
-      const { error } = await supabase
-        .from("subscribers")
-        .insert({ email: result.data });
-      
+      const { error } = await supabase.from("subscribers").insert({ email: result.data });
       if (error) {
         if (error.code === "23505") {
           toast.info("You're already part of the shi-for family.");
@@ -44,37 +38,47 @@ const NewsletterSection = () => {
   };
 
   return (
-    <section className="section-padding-sm bg-foreground text-background">
+    <section className="section-padding-sm bg-primary text-primary-foreground"
+      style={{
+        backgroundImage: `
+          repeating-linear-gradient(0deg, transparent, transparent 5px, hsl(var(--accent) / 0.3) 5px, hsl(var(--accent) / 0.3) 10px),
+          repeating-linear-gradient(90deg, transparent, transparent 5px, hsl(var(--secondary) / 0.3) 5px, hsl(var(--secondary) / 0.3) 10px)
+        `,
+      }}
+    >
       <div className="container mx-auto px-5 sm:px-8 lg:px-16">
         <Reveal>
-          <div className="max-w-3xl mx-auto text-center space-y-8 sm:space-y-10">
-            <p className="text-label text-background/40 tracking-[0.3em]">
-              Stay Connected
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <p className="text-label tracking-widest animate-blink text-primary-foreground">
+              📧 STAY CONNECTED 📧
             </p>
             
-            <h2 className="font-display text-section text-background font-light italic">
-              Join the Journey
+            <h2 className="text-section text-primary-foreground"
+              style={{ textDecoration: 'underline wavy hsl(var(--accent))', textShadow: '3px 3px 0px hsl(var(--accent))' }}
+            >
+              🎉 Join the Journey!! 🎉
             </h2>
             
-            <p className="text-body text-background/60 max-w-md mx-auto">
-              Be the first to know about new drops, exclusive offers, and the shi-for journey.
+            <p className="text-body text-primary-foreground/80 font-bold">
+              Be the first to know about new drops, exclusive offers, and the shi-for journey. DON'T MISS OUT!!!
             </p>
             
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-0 max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email"
-                className="flex-1 px-4 sm:px-5 py-3.5 sm:py-4 bg-transparent border border-background/15 text-background placeholder:text-background/30 text-xs tracking-wider focus:outline-none focus:border-background/40 transition-colors duration-500"
+                placeholder="✉️ Your email here..."
+                className="flex-1 px-4 py-3 bg-primary-foreground text-primary font-bold text-sm border-4 border-dashed border-accent focus:outline-none focus:border-secondary"
                 required
               />
               <button
                 type="submit"
                 disabled={isLoading}
-                className="px-6 sm:px-8 py-3.5 sm:py-4 bg-accent text-foreground text-xs tracking-[0.25em] uppercase font-normal hover:bg-accent/90 transition-all duration-500 disabled:opacity-50 touch-manipulation active:scale-[0.97]"
+                className="px-8 py-3 bg-accent text-accent-foreground font-bold text-sm tracking-widest uppercase border-4 border-dashed border-primary-foreground hover:bg-secondary hover:text-secondary-foreground disabled:opacity-50"
+                style={{ animation: 'wobble 0.5s ease-in-out infinite alternate' }}
               >
-                {isLoading ? "..." : "Subscribe"}
+                {isLoading ? "⏳..." : "🚀 SUBSCRIBE!!!"}
               </button>
             </form>
           </div>
