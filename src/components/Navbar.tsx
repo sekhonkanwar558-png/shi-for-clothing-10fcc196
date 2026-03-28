@@ -97,16 +97,33 @@ const Navbar = () => {
         <nav className="flex flex-col items-center gap-14">
           <Link
             to="/shop"
-            className="font-display text-4xl text-foreground hover:text-accent transition-colors duration-700 touch-manipulation font-light italic tracking-[0.04em]"
+            className="font-display text-4xl text-foreground hover:text-accent transition-all duration-700 touch-manipulation font-light italic tracking-[0.04em]"
             onClick={() => setIsOpen(false)}
+            style={{
+              opacity: isOpen ? 1 : 0,
+              transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 800ms cubic-bezier(0.16,1,0.3,1) 200ms, transform 800ms cubic-bezier(0.16,1,0.3,1) 200ms',
+            }}
           >
             Shop
           </Link>
-          <div className="w-10 h-px bg-accent/40" />
+          <div
+            className="w-10 h-px bg-accent/40"
+            style={{
+              opacity: isOpen ? 1 : 0,
+              transform: isOpen ? 'scaleX(1)' : 'scaleX(0)',
+              transition: 'opacity 600ms ease 400ms, transform 600ms cubic-bezier(0.16,1,0.3,1) 400ms',
+            }}
+          />
           <a
             href="/#philosophy"
-            className="font-display text-4xl text-foreground hover:text-accent transition-colors duration-700 touch-manipulation font-light italic tracking-[0.04em]"
+            className="font-display text-4xl text-foreground hover:text-accent transition-all duration-700 touch-manipulation font-light italic tracking-[0.04em]"
             onClick={() => setIsOpen(false)}
+            style={{
+              opacity: isOpen ? 1 : 0,
+              transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 800ms cubic-bezier(0.16,1,0.3,1) 500ms, transform 800ms cubic-bezier(0.16,1,0.3,1) 500ms',
+            }}
           >
             Philosophy
           </a>
