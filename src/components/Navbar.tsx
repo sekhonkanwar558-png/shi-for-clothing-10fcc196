@@ -90,11 +90,11 @@ const Navbar = () => {
 
       {/* Mobile Navigation Overlay */}
       <div 
-        className={`md:hidden fixed inset-0 top-[64px] bg-background z-40 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`md:hidden fixed inset-0 top-[64px] bg-background z-40 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col items-center justify-center ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
-        <div className="flex flex-col items-center justify-center h-full gap-12 -mt-16">
+        <div className="flex flex-col items-center gap-10">
           <Link
             to="/shop"
             className="font-display text-3xl text-foreground hover:text-accent transition-colors duration-700 touch-manipulation font-light tracking-[0.05em]"
@@ -109,7 +109,7 @@ const Navbar = () => {
           >
             Philosophy
           </a>
-          <div className="w-8 h-px bg-accent" />
+          <div className="w-8 h-px bg-accent mt-2" />
           <p className="text-label text-muted-foreground tracking-[0.3em]">
             Wear the calm.
           </p>
