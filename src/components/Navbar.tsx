@@ -94,26 +94,23 @@ const Navbar = () => {
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
-        <div className="flex flex-col items-center gap-10">
+        <nav className="flex flex-col items-center gap-14">
           <Link
             to="/shop"
-            className="font-display text-3xl text-foreground hover:text-accent transition-colors duration-700 touch-manipulation font-light tracking-[0.05em]"
+            className="font-display text-4xl text-foreground hover:text-accent transition-colors duration-700 touch-manipulation font-light italic tracking-[0.04em]"
             onClick={() => setIsOpen(false)}
           >
             Shop
           </Link>
+          <div className="w-10 h-px bg-accent/40" />
           <a
             href="/#philosophy"
-            className="font-display text-3xl text-foreground hover:text-accent transition-colors duration-700 touch-manipulation font-light tracking-[0.05em]"
+            className="font-display text-4xl text-foreground hover:text-accent transition-colors duration-700 touch-manipulation font-light italic tracking-[0.04em]"
             onClick={() => setIsOpen(false)}
           >
             Philosophy
           </a>
-          <div className="w-8 h-px bg-accent mt-2" />
-          <p className="text-label text-muted-foreground tracking-[0.3em]">
-            Wear the calm.
-          </p>
-        </div>
+        </nav>
       </div>
     </nav>
   );
