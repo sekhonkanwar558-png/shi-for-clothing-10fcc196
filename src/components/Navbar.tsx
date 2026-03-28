@@ -68,7 +68,7 @@ const Navbar = () => {
           <Link to="/shop" className="nav-link text-label tracking-[0.2em]">
             Shop
           </Link>
-          <a href="/#about" className="nav-link text-label tracking-[0.2em]">
+          <a href="/#philosophy" className="nav-link text-label tracking-[0.2em]">
             Philosophy
           </a>
           <ShopifyCart />
@@ -103,7 +103,7 @@ const Navbar = () => {
             Shop
           </Link>
           <a
-            href="/#about"
+            href="/#philosophy"
             className="font-display text-3xl text-foreground hover:text-accent transition-colors duration-700 touch-manipulation font-light tracking-[0.05em]"
             onClick={() => setIsOpen(false)}
           >
