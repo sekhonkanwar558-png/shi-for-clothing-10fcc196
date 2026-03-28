@@ -90,39 +90,39 @@ const Navbar = () => {
 
       {/* Mobile Navigation Overlay */}
       <div 
-        className={`md:hidden fixed inset-0 top-[64px] bg-background z-40 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col items-center justify-center ${
+        className={`md:hidden fixed inset-0 top-[64px] bg-background z-40 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >
-        <nav className="flex flex-col items-center gap-14">
+        <nav className="flex items-center gap-8">
           <Link
             to="/shop"
-            className="font-display text-4xl text-foreground hover:text-accent transition-all duration-700 touch-manipulation font-light italic tracking-[0.04em]"
+            className="text-label text-foreground hover:text-accent transition-all duration-700 touch-manipulation tracking-[0.25em]"
             onClick={() => setIsOpen(false)}
             style={{
               opacity: isOpen ? 1 : 0,
-              transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'opacity 800ms cubic-bezier(0.16,1,0.3,1) 200ms, transform 800ms cubic-bezier(0.16,1,0.3,1) 200ms',
+              transform: isOpen ? 'translateX(0)' : 'translateX(-15px)',
+              transition: 'opacity 700ms cubic-bezier(0.16,1,0.3,1) 200ms, transform 700ms cubic-bezier(0.16,1,0.3,1) 200ms',
             }}
           >
             Shop
           </Link>
           <div
-            className="w-10 h-px bg-accent/40"
+            className="w-px h-4 bg-accent/50"
             style={{
               opacity: isOpen ? 1 : 0,
-              transform: isOpen ? 'scaleX(1)' : 'scaleX(0)',
-              transition: 'opacity 600ms ease 400ms, transform 600ms cubic-bezier(0.16,1,0.3,1) 400ms',
+              transform: isOpen ? 'scaleY(1)' : 'scaleY(0)',
+              transition: 'opacity 500ms ease 350ms, transform 500ms cubic-bezier(0.16,1,0.3,1) 350ms',
             }}
           />
           <a
             href="/#philosophy"
-            className="font-display text-4xl text-foreground hover:text-accent transition-all duration-700 touch-manipulation font-light italic tracking-[0.04em]"
+            className="text-label text-foreground hover:text-accent transition-all duration-700 touch-manipulation tracking-[0.25em]"
             onClick={() => setIsOpen(false)}
             style={{
               opacity: isOpen ? 1 : 0,
-              transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'opacity 800ms cubic-bezier(0.16,1,0.3,1) 500ms, transform 800ms cubic-bezier(0.16,1,0.3,1) 500ms',
+              transform: isOpen ? 'translateX(0)' : 'translateX(15px)',
+              transition: 'opacity 700ms cubic-bezier(0.16,1,0.3,1) 450ms, transform 700ms cubic-bezier(0.16,1,0.3,1) 450ms',
             }}
           >
             Philosophy
