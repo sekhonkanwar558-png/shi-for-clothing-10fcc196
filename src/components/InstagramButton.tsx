@@ -6,7 +6,7 @@ const InstagramButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-[5.5rem] right-6 sm:bottom-[6.5rem] sm:right-8 z-50 group"
+      className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 group"
       aria-label="Follow on Instagram"
     >
       <div className="relative p-3 sm:p-3.5 rounded-full bg-background/80 backdrop-blur-md border border-border/40 shadow-[0_4px_20px_-4px_hsl(var(--foreground)/0.1)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:shadow-[0_8px_30px_-4px_hsl(var(--foreground)/0.15)] group-hover:border-accent/40 group-hover:scale-105 group-active:scale-95">
