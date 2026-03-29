@@ -76,9 +76,18 @@ const Navbar = () => {
           <Link to="/shop" className="nav-link text-label tracking-[0.2em]">
             Shop
           </Link>
-          <a href="/#philosophy" className="nav-link text-label tracking-[0.2em]">
+          <button
+            className="nav-link text-label tracking-[0.2em]"
+            onClick={() => {
+              if (location.pathname !== '/') {
+                navigate('/', { state: { scrollTo: 'philosophy' } });
+              } else {
+                document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          >
             Philosophy
-          </a>
+          </button>
           <ShopifyCart />
         </div>
 
