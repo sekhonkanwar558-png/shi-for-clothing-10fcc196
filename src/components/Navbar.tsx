@@ -89,60 +89,47 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation Overlay */}
-      <div 
-        className={`md:hidden fixed inset-0 z-[60] transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col items-center justify-center ${
-          isOpen ? 'opacity-100 visible backdrop-blur-2xl bg-background/90' : 'opacity-0 invisible pointer-events-none bg-background/0'
-        }`}
-      >
-        {/* Close button */}
-        <button
+      {isOpen && (
+        <div 
+          className="md:hidden fixed inset-0 z-[60] bg-foreground/20 backdrop-blur-sm flex items-center justify-center"
           onClick={() => setIsOpen(false)}
-          className="absolute top-5 right-5 p-2 text-foreground/60 hover:text-foreground transition-all duration-500 touch-manipulation active:scale-90"
-          aria-label="Close menu"
-          style={{
-            opacity: isOpen ? 1 : 0,
-            transition: 'opacity 500ms ease 100ms',
-          }}
         >
-          <X size={24} strokeWidth={1.2} />
-        </button>
+          <div 
+            className="bg-background rounded-none shadow-[0_8px_40px_-8px_hsl(var(--foreground)/0.15)] w-[85vw] max-w-sm px-8 py-8 animate-fade-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between mb-8">
+              <span className="text-sm font-light tracking-[0.15em] text-foreground/70 uppercase">Menu</span>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-1 text-foreground/50 hover:text-foreground transition-colors duration-300 touch-manipulation"
+                aria-label="Close menu"
+              >
+                <X size={20} strokeWidth={1.2} />
+              </button>
+            </div>
 
-        {/* Nav links stacked vertically */}
-        <nav className="flex flex-col items-center gap-10">
-          <Link
-            to="/shop"
-            className="text-2xl font-light text-foreground hover:text-accent transition-all duration-700 touch-manipulation tracking-[0.3em] uppercase"
-            onClick={() => setIsOpen(false)}
-            style={{
-              opacity: isOpen ? 1 : 0,
-              transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'opacity 700ms cubic-bezier(0.16,1,0.3,1) 200ms, transform 700ms cubic-bezier(0.16,1,0.3,1) 200ms',
-            }}
-          >
-            Shop
-          </Link>
-          <div
-            className="w-8 h-px bg-accent/40"
-            style={{
-              opacity: isOpen ? 1 : 0,
-              transform: isOpen ? 'scaleX(1)' : 'scaleX(0)',
-              transition: 'opacity 500ms ease 350ms, transform 500ms cubic-bezier(0.16,1,0.3,1) 350ms',
-            }}
-          />
-          <a
-            href="/#philosophy"
-            className="text-2xl font-light text-foreground hover:text-accent transition-all duration-700 touch-manipulation tracking-[0.3em] uppercase"
-            onClick={() => setIsOpen(false)}
-            style={{
-              opacity: isOpen ? 1 : 0,
-              transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'opacity 700ms cubic-bezier(0.16,1,0.3,1) 450ms, transform 700ms cubic-bezier(0.16,1,0.3,1) 450ms',
-            }}
-          >
-            Philosophy
-          </a>
-        </nav>
-      </div>
+            {/* Links */}
+            <div className="flex flex-col gap-0 border-t border-foreground/8">
+              <Link
+                to="/shop"
+                className="py-4 text-[15px] font-normal text-foreground tracking-[0.08em] border-b border-foreground/8 hover:text-accent transition-colors duration-500 touch-manipulation"
+                onClick={() => setIsOpen(false)}
+              >
+                Shop
+              </Link>
+              <a
+                href="/#philosophy"
+                className="py-4 text-[15px] font-normal text-foreground tracking-[0.08em] border-b border-foreground/8 hover:text-accent transition-colors duration-500 touch-manipulation"
+                onClick={() => setIsOpen(false)}
+              >
+                Philosophy
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
