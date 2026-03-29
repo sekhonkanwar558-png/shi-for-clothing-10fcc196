@@ -17,6 +17,13 @@ const Navbar = () => {
 
   useEffect(() => {
     setIsOpen(false);
+    // Handle scroll-to-philosophy after navigating from another page
+    if (location.pathname === '/' && location.state?.scrollTo === 'philosophy') {
+      setTimeout(() => {
+        document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+      window.history.replaceState({}, '');
+    }
   }, [location]);
 
   useEffect(() => {
