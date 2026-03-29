@@ -91,7 +91,7 @@ const Navbar = () => {
       {/* Mobile Navigation Overlay */}
       {isOpen && (
         <div 
-          className="md:hidden fixed inset-0 z-[60] bg-foreground/20 backdrop-blur-sm flex items-center justify-center"
+          className="md:hidden fixed inset-0 z-[60] bg-foreground/20 backdrop-blur-sm flex items-start justify-center pt-[25vh]"
           onClick={() => setIsOpen(false)}
         >
           <div 
