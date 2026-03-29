@@ -90,8 +90,8 @@ const Navbar = () => {
 
       {/* Mobile Navigation Overlay */}
       <div 
-        className={`md:hidden fixed inset-0 top-[64px] bg-background z-40 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center ${
-          isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        className={`md:hidden fixed inset-0 z-40 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center ${
+          isOpen ? 'opacity-100 visible backdrop-blur-xl bg-background/80' : 'opacity-0 invisible pointer-events-none bg-background/0'
         }`}
       >
         <nav className="flex items-center gap-8">
