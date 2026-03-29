@@ -90,38 +90,52 @@ const Navbar = () => {
 
       {/* Mobile Navigation Overlay */}
       <div 
-        className={`md:hidden fixed inset-0 z-40 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center ${
-          isOpen ? 'opacity-100 visible backdrop-blur-xl bg-background/80' : 'opacity-0 invisible pointer-events-none bg-background/0'
+        className={`md:hidden fixed inset-0 z-[60] transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col items-center justify-center ${
+          isOpen ? 'opacity-100 visible backdrop-blur-2xl bg-background/90' : 'opacity-0 invisible pointer-events-none bg-background/0'
         }`}
       >
-        <nav className="flex items-center gap-8">
+        {/* Close button */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className="absolute top-5 right-5 p-2 text-foreground/60 hover:text-foreground transition-all duration-500 touch-manipulation active:scale-90"
+          aria-label="Close menu"
+          style={{
+            opacity: isOpen ? 1 : 0,
+            transition: 'opacity 500ms ease 100ms',
+          }}
+        >
+          <X size={24} strokeWidth={1.2} />
+        </button>
+
+        {/* Nav links stacked vertically */}
+        <nav className="flex flex-col items-center gap-10">
           <Link
             to="/shop"
-            className="text-label text-foreground hover:text-accent transition-all duration-700 touch-manipulation tracking-[0.25em]"
+            className="text-2xl font-light text-foreground hover:text-accent transition-all duration-700 touch-manipulation tracking-[0.3em] uppercase"
             onClick={() => setIsOpen(false)}
             style={{
               opacity: isOpen ? 1 : 0,
-              transform: isOpen ? 'translateX(0)' : 'translateX(-15px)',
+              transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
               transition: 'opacity 700ms cubic-bezier(0.16,1,0.3,1) 200ms, transform 700ms cubic-bezier(0.16,1,0.3,1) 200ms',
             }}
           >
             Shop
           </Link>
           <div
-            className="w-px h-4 bg-accent/50"
+            className="w-8 h-px bg-accent/40"
             style={{
               opacity: isOpen ? 1 : 0,
-              transform: isOpen ? 'scaleY(1)' : 'scaleY(0)',
+              transform: isOpen ? 'scaleX(1)' : 'scaleX(0)',
               transition: 'opacity 500ms ease 350ms, transform 500ms cubic-bezier(0.16,1,0.3,1) 350ms',
             }}
           />
           <a
             href="/#philosophy"
-            className="text-label text-foreground hover:text-accent transition-all duration-700 touch-manipulation tracking-[0.25em]"
+            className="text-2xl font-light text-foreground hover:text-accent transition-all duration-700 touch-manipulation tracking-[0.3em] uppercase"
             onClick={() => setIsOpen(false)}
             style={{
               opacity: isOpen ? 1 : 0,
-              transform: isOpen ? 'translateX(0)' : 'translateX(15px)',
+              transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
               transition: 'opacity 700ms cubic-bezier(0.16,1,0.3,1) 450ms, transform 700ms cubic-bezier(0.16,1,0.3,1) 450ms',
             }}
           >
