@@ -1,6 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ShopifyCart from "./ShopifyCart";
 import onigiriLogo from "@/assets/onigiri-logo.png";
 
@@ -91,42 +91,47 @@ const Navbar = () => {
       {/* Mobile Navigation Overlay */}
       {isOpen && (
         <div 
-          className="md:hidden fixed inset-0 z-[60] bg-foreground/20 backdrop-blur-sm flex items-start justify-center pt-[25vh]"
+          className="md:hidden fixed inset-0 z-[60] bg-foreground/10 backdrop-blur-md flex items-start justify-center pt-[28vh]"
           onClick={() => setIsOpen(false)}
         >
           <div 
-            className="bg-background rounded-none shadow-[0_8px_40px_-8px_hsl(var(--foreground)/0.15)] w-[85vw] max-w-sm px-8 py-8 animate-fade-in"
+            className="bg-background border border-foreground/6 shadow-[0_12px_48px_-12px_hsl(var(--foreground)/0.12)] w-[78vw] max-w-xs px-7 pt-6 pb-5 animate-fade-in"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between mb-8">
-              <span className="text-sm font-light tracking-[0.15em] text-foreground/70 uppercase">Menu</span>
+            {/* Close button */}
+            <div className="flex justify-end mb-5">
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 text-foreground/50 hover:text-foreground transition-colors duration-300 touch-manipulation"
+                className="p-1.5 text-foreground/40 hover:text-foreground transition-colors duration-300 touch-manipulation"
                 aria-label="Close menu"
               >
-                <X size={20} strokeWidth={1.2} />
+                <X size={18} strokeWidth={1.3} />
               </button>
             </div>
 
             {/* Links */}
-            <div className="flex flex-col gap-0 border-t border-foreground/8">
+            <nav className="flex flex-col">
               <Link
                 to="/shop"
-                className="py-4 text-[15px] font-normal text-foreground tracking-[0.08em] border-b border-foreground/8 hover:text-accent transition-colors duration-500 touch-manipulation"
+                className="py-4 text-[13px] font-light text-foreground tracking-[0.2em] uppercase border-b border-foreground/6 hover:text-accent hover:tracking-[0.25em] transition-all duration-500 touch-manipulation"
                 onClick={() => setIsOpen(false)}
               >
                 Shop
               </Link>
-              <a
-                href="/#philosophy"
-                className="py-4 text-[15px] font-normal text-foreground tracking-[0.08em] border-b border-foreground/8 hover:text-accent transition-colors duration-500 touch-manipulation"
-                onClick={() => setIsOpen(false)}
+              <button
+                className="py-4 text-[13px] font-light text-foreground tracking-[0.2em] uppercase text-left hover:text-accent hover:tracking-[0.25em] transition-all duration-500 touch-manipulation"
+                onClick={() => {
+                  setIsOpen(false);
+                  if (location.pathname !== '/') {
+                    navigate('/', { state: { scrollTo: 'philosophy' } });
+                  } else {
+                    document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
               >
                 Philosophy
-              </a>
-            </div>
+              </button>
+            </nav>
           </div>
         </div>
       )}
