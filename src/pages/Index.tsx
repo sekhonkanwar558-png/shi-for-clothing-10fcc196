@@ -6,7 +6,6 @@ import PhilosophySection from "@/components/PhilosophySection";
 import CraftsmanshipSection from "@/components/CraftsmanshipSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import InstagramButton from "@/components/InstagramButton";
 
 const Index = () => {
@@ -25,7 +24,6 @@ const Index = () => {
       <NewsletterSection />
       <Footer />
       <InstagramButton />
-      <WhatsAppButton />
     </main>
   );
 };
