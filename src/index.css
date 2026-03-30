@@ -200,11 +200,11 @@
 
   /* Primary CTA — minimal luxury */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-normal text-xs tracking-[0.25em] uppercase transition-all duration-500 ease-out;
+    @apply inline-flex items-center justify-center px-10 py-4 bg-transparent text-foreground font-normal text-xs tracking-[0.25em] uppercase border border-foreground transition-all duration-500 ease-out;
   }
 
   .btn-primary:hover {
-    @apply bg-accent text-foreground;
+    @apply bg-foreground text-background;
   }
 
   .btn-primary:active {
