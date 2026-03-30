@@ -1,51 +1,33 @@
-import onigiriLogo from "@/assets/onigiri-logo.png";
-import { Link } from "react-router-dom";
-import { Reveal } from "@/hooks/useScrollReveal";
-
 const Footer = () => {
   return (
-    <footer className="py-16 sm:py-20 md:py-28 border-t border-border bg-background safe-bottom">
-      <div className="container mx-auto px-5 sm:px-8 lg:px-16">
-        <Reveal>
-          <div className="max-w-5xl mx-auto text-center space-y-10 sm:space-y-12">
-            {/* Logo */}
-            <Link 
-              to="/"
-              className="inline-flex flex-col items-center gap-4 sm:gap-5 hover:opacity-60 transition-opacity duration-700 touch-manipulation"
-            >
-              <img 
-                src={onigiriLogo} 
-                alt="shi-for" 
-                className="h-12 sm:h-14 md:h-16 w-auto" 
-              />
-              <span className="font-display text-xl sm:text-2xl tracking-[0.05em] text-foreground font-light">
-                shi-for
-              </span>
-            </Link>
-
-            {/* Philosophy line */}
-            <p className="font-display text-base sm:text-lg md:text-xl text-muted-foreground font-light italic max-w-md mx-auto tracking-[0.02em]">
-              "Wear the calm."
-            </p>
-            
-            <div className="w-12 h-px bg-accent mx-auto" />
-            
-            {/* Links */}
-            <div className="flex justify-center gap-10 sm:gap-12">
-              <Link to="/shop" className="nav-link text-label tracking-[0.3em]">
-                Shop
-              </Link>
-              <a href="#about" className="nav-link text-label tracking-[0.3em]">
-                Philosophy
-              </a>
-            </div>
-            
-            {/* Copyright */}
-            <p className="text-micro text-muted-foreground pt-6 sm:pt-8 tracking-[0.05em]">
-              © {new Date().getFullYear()} shi-for. All rights reserved.
-            </p>
-          </div>
-        </Reveal>
+    <footer className="border-t border-border bg-background safe-bottom">
+      <div className="container mx-auto px-5 sm:px-8 lg:px-16 py-4 sm:py-5 flex items-center justify-between">
+        <span className="text-[10px] sm:text-[11px] font-light tracking-[0.3em] uppercase text-muted-foreground">
+          shi-for
+        </span>
+        <a
+          href="https://www.instagram.com/shiforyo"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow on Instagram"
+          className="text-muted-foreground hover:text-foreground transition-colors duration-500"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+          </svg>
+        </a>
       </div>
     </footer>
   );
