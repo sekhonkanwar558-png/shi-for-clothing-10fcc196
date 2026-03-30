@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-background safe-bottom">
+    <footer id="about" className="border-t border-border bg-background safe-bottom">
       <div className="container mx-auto px-5 sm:px-8 lg:px-16 py-4 sm:py-5 flex items-center justify-between">
         <span className="text-[10px] sm:text-[11px] font-light tracking-[0.3em] uppercase text-muted-foreground">
           shi-for
