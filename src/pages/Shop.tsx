@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Loader2, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import InstagramButton from "@/components/InstagramButton";
 import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
 
 const Shop = () => {
