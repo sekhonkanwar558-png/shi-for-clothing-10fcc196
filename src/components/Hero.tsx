@@ -105,7 +105,7 @@ const Hero = () => {
               onClick={() => navigate('/shop')} 
               className="btn-primary active:scale-[0.97] transition-transform"
             >
-              Shop
+              Discover
             </button>
           </div>
         </div>
