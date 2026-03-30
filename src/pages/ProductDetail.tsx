@@ -476,7 +476,7 @@ const ProductDetail = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
+      <InstagramButton />
     </main>
   );
 };

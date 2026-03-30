@@ -132,7 +132,7 @@ const Shop = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
+      <InstagramButton />
     </main>
   );
 };

@@ -17,7 +17,6 @@ const Navbar = () => {
 
   useEffect(() => {
     setIsOpen(false);
-    // Handle scroll-to-philosophy after navigating from another page
     if (location.pathname === '/' && location.state?.scrollTo === 'philosophy') {
       setTimeout(() => {
         document.getElementById('philosophy')?.scrollIntoView({ behavior: 'smooth' });
@@ -92,51 +91,96 @@ const Navbar = () => {
         </div>
 
         {/* Mobile */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-4 md:hidden">
           <ShopifyCart />
           <button
-            className="p-2 text-foreground hover:opacity-60 transition-opacity duration-500 touch-manipulation active:scale-[0.94]"
+            className="relative w-11 h-11 flex items-center justify-center text-foreground hover:opacity-60 transition-all duration-500 touch-manipulation active:scale-[0.92]"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
             aria-expanded={isOpen}
           >
-            {isOpen ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
+            <div className="relative w-[20px] h-[14px]">
+              <span 
+                className={`absolute left-0 w-full h-[1.2px] bg-foreground transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  isOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'
+                }`} 
+              />
+              <span 
+                className={`absolute left-0 top-1/2 -translate-y-1/2 w-full h-[1.2px] bg-foreground transition-all duration-300 ${
+                  isOpen ? 'opacity-0 scale-x-0' : 'opacity-100'
+                }`} 
+              />
+              <span 
+                className={`absolute left-0 w-full h-[1.2px] bg-foreground transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  isOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'
+                }`} 
+              />
+            </div>
           </button>
         </div>
       </div>
 
       {/* Mobile Navigation Overlay */}
-      {isOpen && (
+      <div 
+        className={`md:hidden fixed inset-0 z-[60] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isOpen 
+            ? 'opacity-100 pointer-events-auto' 
+            : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Backdrop */}
         <div 
-          className="md:hidden fixed inset-0 z-[60] bg-foreground/10 backdrop-blur-md flex items-start justify-center pt-[28vh]"
+          className={`absolute inset-0 bg-foreground/10 backdrop-blur-md transition-opacity duration-500 ${
+            isOpen ? 'opacity-100' : 'opacity-0'
+          }`}
           onClick={() => setIsOpen(false)}
-        >
+        />
+        
+        {/* Menu Card */}
+        <div className="absolute inset-0 flex items-start justify-center pt-[28vh]">
           <div 
-            className="bg-background border border-foreground/6 shadow-[0_12px_48px_-12px_hsl(var(--foreground)/0.12)] w-[78vw] max-w-xs px-7 pt-6 pb-5 animate-fade-in"
+            className={`bg-background border border-foreground/6 shadow-[0_12px_48px_-12px_hsl(var(--foreground)/0.12)] w-[78vw] max-w-xs transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isOpen 
+                ? 'opacity-100 translate-y-0 scale-100' 
+                : 'opacity-0 translate-y-4 scale-[0.97]'
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close button */}
-            <div className="flex justify-end mb-5">
+            {/* Header */}
+            <div className="flex items-center justify-between px-7 pt-6 pb-4">
+              <span className="text-[10px] font-light tracking-[0.25em] uppercase text-muted-foreground">
+                Menu
+              </span>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 text-foreground/40 hover:text-foreground transition-colors duration-300 touch-manipulation"
+                className="w-9 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors duration-300 touch-manipulation"
                 aria-label="Close menu"
               >
-                <X size={18} strokeWidth={1.3} />
+                <X size={16} strokeWidth={1.3} />
               </button>
             </div>
 
             {/* Links */}
-            <nav className="flex flex-col">
+            <nav className="px-7 pb-6">
               <Link
                 to="/shop"
-                className="py-4 text-[13px] font-light text-foreground tracking-[0.2em] uppercase border-b border-foreground/6 hover:text-accent hover:tracking-[0.25em] transition-all duration-500 touch-manipulation"
+                className="block py-4 text-[13px] font-light text-foreground tracking-[0.2em] uppercase border-t border-foreground/6 hover:text-accent hover:tracking-[0.25em] transition-all duration-500 touch-manipulation"
+                style={{
+                  opacity: isOpen ? 1 : 0,
+                  transform: isOpen ? 'translateY(0)' : 'translateY(8px)',
+                  transition: 'opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s, color 0.5s, letter-spacing 0.5s',
+                }}
                 onClick={() => setIsOpen(false)}
               >
                 Shop
               </Link>
               <button
-                className="py-4 text-[13px] font-light text-foreground tracking-[0.2em] uppercase text-left hover:text-accent hover:tracking-[0.25em] transition-all duration-500 touch-manipulation"
+                className="block w-full py-4 text-[13px] font-light text-foreground tracking-[0.2em] uppercase text-left border-t border-foreground/6 hover:text-accent hover:tracking-[0.25em] transition-all duration-500 touch-manipulation"
+                style={{
+                  opacity: isOpen ? 1 : 0,
+                  transform: isOpen ? 'translateY(0)' : 'translateY(8px)',
+                  transition: 'opacity 0.4s ease 0.25s, transform 0.4s ease 0.25s, color 0.5s, letter-spacing 0.5s',
+                }}
                 onClick={() => {
                   setIsOpen(false);
                   if (location.pathname !== '/') {
@@ -151,7 +195,7 @@ const Navbar = () => {
             </nav>
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 };
